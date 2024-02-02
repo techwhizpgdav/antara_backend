@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('societies', function (Blueprint $table) {
             $table->id();
-            $table->string('society_name');
-            $table->text('society_description');
+            $table->string('name');
+            $table->string('logo');
+            $table->text('description');
+            $table->json('metadata')->nullable();
             $table->timestamps();
-            
         });
     }
 
