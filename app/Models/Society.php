@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Society extends Model
 {
     use HasFactory;
+    protected $tables='societies';
+    protected $fillable=[
+        'name',
+        'logo',
+        'description'
+    ];
 }
