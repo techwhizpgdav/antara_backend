@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('competitions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('society_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
+            $table->string('title');
+            $table->string('image_url');
+            $table->json('rules');
+            $table->json('queries_to');
             $table->timestamps();
         });
     }
