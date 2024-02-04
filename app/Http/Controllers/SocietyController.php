@@ -8,6 +8,23 @@ use App\Models\Society;
 
 class SocietyController extends Controller
 {
+
+
+    // Read
+
+    public function read($id):JsonResponse
+    {
+   
+    $record = Society::find($id);
+
+    if ($record) {
+        return response()->json(['actualdata' => $record], 200);
+    } else {
+        return response()->json(['message' => 'Record not found'], 404);
+    }
+    }
+
+    // Insert
      
 
     public function insert(Request $request): JsonResponse
@@ -30,6 +47,8 @@ class SocietyController extends Controller
             return response()->json(['message' => 'Failed to create record'], 500);
         }
     }
+
+    // update
     
     public function update(Request $request, $id):JsonResponse
     {
@@ -55,8 +74,23 @@ class SocietyController extends Controller
         } else {
             return response()->json(['message' => 'Record not found'], 404);
         }   
+    }
 
 
+    // delete
+    public function delete($id):JsonResponse
+    {
     
-}
+    $record = Society::find($id);
+
+    if ($record) {
+        
+        $record->delete();
+
+        return response()->json(['message' => 'Record deleted successfully'], 200);
+    } else {
+        return response()->json(['message' => 'Record not found'], 404);
+    }
+
+    }
 }
