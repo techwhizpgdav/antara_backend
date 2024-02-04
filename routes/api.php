@@ -20,5 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('society',[SocietyController::class,'insert']);
-Route::put('society',[SocietyController::class,'update']);
+Route::post('/society', [SocietyController::class, 'insert']);
+Route::get('/society/{id}', [SocietyController::class, 'read']);
+Route::put('/society/{id}', [SocietyController::class, 'update']);
+Route::delete('/society/{id}', [SocietyController::class, 'delete']);http://127.0.0.1:8000/api/society
