@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Society;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,6 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class SocietyFactory extends Factory
 {
+
+    protected $model = Society::class;
     /**
      * Define the model's default state.
      *
@@ -17,7 +20,9 @@ class SocietyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => $this->faker->name(),
+            'logo' => $this->faker->url(),
+            'description' => $this->faker->sentence()
         ];
     }
 }

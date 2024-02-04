@@ -1,97 +1,73 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\SocietyResource;
 use App\Models\Society;
+use Illuminate\Http\Request;
 
 class SocietyController extends Controller
 {
-
-
-    // Read
-
-    public function read($id):JsonResponse
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-   
-    $record = Society::find($id);
-
-    if ($record) {
-        return response()->json(['actualdata' => $record], 200);
-    } else {
-        return response()->json(['message' => 'Record not found'], 404);
-    }
+        $data = Society::all();
+        return new SocietyResource($data);
     }
 
-    // Insert
-     
-
-    public function insert(Request $request): JsonResponse
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
-            'logo' => 'required|mimes:jpg,png|max:2048', 
+            'name' => 'required|string|max:100|unique:societies,name',
+            'logo' => 'required',
             'description' => 'required|string',
         ]);
 
-        if ($request->fails()) {
-            return response()->json(['message' => 'Validation failed', 'errors' => $request->errors()], 400);
-        }
-        $created = Society::create($request->all());
+        $data = Society::create($request->only(['name', 'logo', 'description']));
 
-
-        if ($created) {
-            return response()->json(['message' => 'Record created successfully'], 201);
-        } else {
-            return response()->json(['message' => 'Failed to create record'], 500);
-        }
+        return new SocietyResource($data);
     }
 
-    // update
-    
-    public function update(Request $request, $id):JsonResponse
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $record = Society::find($id);
+        return new SocietyResource($record);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'logo' => 'nullable|mimes:jpg,png|max:2048', 
+            'logo' => 'nullable|mimes:jpg,png|max:2048',
             'description' => 'required|string',
         ]);
-
-        if ($request->fails()) {
-            return response()->json(['message' => 'Validation failed', 'errors' => $request->errors()], 400);
-        }
 
         // Find the record by its ID
         $record = Society::find($id);
 
-      
-        if ($record) {
-           
-            $record->update($request->all());
+        $update = $record->update($request->only(['name', 'logo', 'description']));
 
-            return response()->json(['message' => 'Record updated successfully'], 200);
-        } else {
-            return response()->json(['message' => 'Record not found'], 404);
-        }   
+        return response()->json(['data' => $update], 200);
     }
 
-
-    // delete
-    public function delete($id):JsonResponse
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
     {
-    
-    $record = Society::find($id);
-
-    if ($record) {
-        
-        $record->delete();
-
-        return response()->json(['message' => 'Record deleted successfully'], 200);
-    } else {
-        return response()->json(['message' => 'Record not found'], 404);
-    }
-
+        $record = Society::find($id);
+        $delete = $record->delete();
+        return response()->json(['data' => $delete], 200);
     }
 }
