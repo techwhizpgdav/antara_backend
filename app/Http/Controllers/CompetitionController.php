@@ -13,7 +13,8 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        $data = Competition::with('category')->get();
+        $data = Competition::with(['category','society'])->get();
+
         return new CompetitionResource($data);
     }
 

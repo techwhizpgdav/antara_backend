@@ -26,4 +26,9 @@ class Competition extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function society(): BelongsTo
+    {
+        return $this->belongsTo(Society::class);
+    }
+
 }
