@@ -18,6 +18,10 @@ class CompetitionFactory extends Factory
     {
         return [
             //
+            'categor_id' => $this->faker->numberbetween(1,10),
+            'society_id' => $this->faker->numberbetween(1,10),
+            'title' => $this->faker->name(),
+            'logo' => $this->faker->url(),
         ];
     }
 }
