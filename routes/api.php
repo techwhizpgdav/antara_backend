@@ -22,4 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('societies', SocietyController::class);
-Route::apiResource('competitions',CompetitionController::class);
+Route::apiResource('competitions', CompetitionController::class);

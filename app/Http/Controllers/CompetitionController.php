@@ -24,8 +24,8 @@ class CompetitionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category_id' => 'required|integer|exists:categories',
-            'society_id' => 'required|integer|exists:societies',
+            'category_id' => 'required|integer|exists:categories,id',
+            'society_id' => 'required|integer|exists:societies,id',
             'title' => 'required|string|max:200',
             'image_url' => 'required|url',
         ]);

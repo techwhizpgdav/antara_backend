@@ -8,6 +8,7 @@ use App\Models\Competition;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class ParticipationController extends Controller
 {
@@ -16,7 +17,11 @@ class ParticipationController extends Controller
      */
     public function index()
     {
-        //
+        $data =  Competition::with(['user' => function ($q) {
+            $q->where('user_id', auth()->user()->id);
+        }]);
+
+        return new GeneralResource($data);
     }
 
     /**
@@ -42,7 +47,11 @@ class ParticipationController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = Competition::with(['user' => function ($q) use ($id) {
+            $q->where(['user_id', auth()->user()->id, 'comptetion_user.id' => $id]);
+        }]);
+
+        return new GeneralResource($data);
     }
 
     /**
@@ -58,6 +67,6 @@ class ParticipationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return DB::table('competition_user')->where(['id' => $id, 'user_id' => auth()->user()->id])->delete();
     }
 }
