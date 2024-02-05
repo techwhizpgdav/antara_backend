@@ -2,29 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Competition;
 use Illuminate\Http\Request;
+use App\Http\Resources\CompetitionResource;
 
-class CompetitionsController extends Controller
+class CompetitionController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
-        $competitions = Competition::when($request->input('category_id'), function ($query) use ($request) {
-            $query->where('category_id', $request->input('category_id'));
-        })
-        ->when($request->input('society_id'), function ($query) use ($request) {
-            $query->where('society_id', $request->input('society_id'));
-        })
-        ->get();
-
-       
-        $resources =CompetitionResource::collection($competitions);
-
-        return response()->json(['data' => $resources], 200);
-
+        $data = Competition::with('category')->get();
+        return new CompetitionResource($data);
     }
 
     /**
@@ -32,21 +22,16 @@ class CompetitionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-
         $request->validate([
-            'category_id' => 'required|integer|exists:categories,id',
-            'society_id' => 'required|integer|exists:societies,id',
+            'category_id' => 'required|integer|exists:categories',
+            'society_id' => 'required|integer|exists:societies',
             'title' => 'required|string|max:200',
             'image_url' => 'required|url',
         ]);
 
-        $data = Competition::create($request->only(['category_id','society_id','title','image_url']));
+        $data = Competition::create($request->only(['category_id', 'society_id', 'title', 'image_url']));
 
-        $resource = new CompetitionResource($data);
-
-        return response()->json(['data' => $resource], 200);
-
+        return new CompetitionResource($data);
     }
 
     /**
@@ -54,8 +39,6 @@ class CompetitionsController extends Controller
      */
     public function show(string $id)
     {
-        //
-
         $record = Competition::find($id);
         return new CompetitionResource($record);
     }
@@ -76,8 +59,7 @@ class CompetitionsController extends Controller
         $record = Competition::find($id);
         $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url']));
 
-        return response()->json(['data' => new CompetitionResource($update)], 200);
-
+        return new CompetitionResource($update);
     }
 
     /**
