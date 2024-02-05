@@ -53,9 +53,7 @@ class SocietyController extends Controller
             'description' => 'required|string',
         ]);
 
-        // Find the record by its ID
         $record = Society::find($id);
-
         $update = $record->update($request->only(['name', 'logo', 'description']));
 
         return response()->json(['data' => $update], 200);
