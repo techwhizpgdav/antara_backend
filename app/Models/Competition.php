@@ -17,7 +17,9 @@ class Competition extends Model
         'category_id',
         'society_id',
         'title',
-        'image_url'
+        'image_url',
+        'rules',
+        'queries_to'
     ];
 
     /**

@@ -29,7 +29,7 @@ class CategoryController extends Controller
         //
         $request->validate([
             'name' => 'required|string|max:100|unique:categories,name',
-            'background_img' => 'required|url',
+            'background_image' => 'required|url',
         ]);
 
        $data = Category::create($request->only(['name', 'background_img']));
@@ -54,10 +54,10 @@ class CategoryController extends Controller
         //
         $request->validate([
             'name' => 'required|string|max:100|unique:categories,name',
-            'background_img' => 'required|url',
+            'background_image' => 'required|url',
         ]);
         $record = Category::find($id);
-        $update = $record->update($request->only(['name', 'logo', 'description']));
+        $update = $record->update($request->only(['name', 'background_image']));
 
         return new CategoryResource($update);
 
@@ -72,10 +72,5 @@ class CategoryController extends Controller
         $record = Category::find($id);
         $delete = $record->delete();
         return new CategoryResource($delete);
-    }
-
-    public function competitions(): HasMany
-    {
-        return $this->hasMany(Competition::class);
     }
 }

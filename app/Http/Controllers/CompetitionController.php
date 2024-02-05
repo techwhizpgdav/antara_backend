@@ -13,7 +13,7 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        $data = Competition::with(['category','society'])->get();
+        $data = Competition::with(['category', 'society'])->get();
 
         return new CompetitionResource($data);
     }
@@ -26,11 +26,13 @@ class CompetitionController extends Controller
         $request->validate([
             'category_id' => 'required|integer|exists:categories,id',
             'society_id' => 'required|integer|exists:societies,id',
-            'title' => 'required|string|max:200',
+            'title' => 'required|string|max:200|unique:competitions',
             'image_url' => 'required|url',
+            'rules' => 'required|json',
+            'queries_to' => 'required|json',
         ]);
 
-        $data = Competition::create($request->only(['category_id', 'society_id', 'title', 'image_url']));
+        $data = Competition::create($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to']));
 
         return new CompetitionResource($data);
     }
@@ -40,7 +42,7 @@ class CompetitionController extends Controller
      */
     public function show(string $id)
     {
-        $record = Competition::find($id);
+        $record = Competition::with(['category', 'society'])->findOrFail($id);
         return new CompetitionResource($record);
     }
 
@@ -55,10 +57,12 @@ class CompetitionController extends Controller
             'society_id' => 'required|integer|exists:societies,id',
             'title' => 'required|string|max:200',
             'image_url' => 'required|url',
+            'rules' => 'required|json',
+            'queries_to' => 'required|json',
         ]);
 
         $record = Competition::find($id);
-        $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url']));
+        $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to']));
 
         return new CompetitionResource($update);
     }
