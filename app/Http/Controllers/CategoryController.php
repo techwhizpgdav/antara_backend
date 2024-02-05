@@ -32,7 +32,7 @@ class CategoryController extends Controller
             'background_image' => 'required|url',
         ]);
 
-       $data = Category::create($request->only(['name', 'background_img']));
+       $data = Category::create($request->only(['name', 'background_image']));
        return new CategoryResource($data);
     }
 
