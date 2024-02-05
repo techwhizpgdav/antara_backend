@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('competition_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
             $table->string('team_code');
             $table->boolean('allowed')->default(true);
+            $table->boolean('authorized')->default(true);
             $table->timestamps();
         });
     }
