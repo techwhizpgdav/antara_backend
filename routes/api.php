@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocietyController;
 use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\ParticipationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);
 Route::apiResource('categories',CategoryController::class);
+Route::apiResource('participations',ParticipationController::class);
