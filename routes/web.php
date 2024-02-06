@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    // return ['Laravel' => app()->version()];
+    return ['Laravel' => app()->version()];
 });
 
 Route::post('test', [ParticipationController::class, 'store']);
