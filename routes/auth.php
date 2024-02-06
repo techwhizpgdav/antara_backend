@@ -20,7 +20,7 @@ Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
     ->middleware('guest')
     ->name('password.email');
 
-Route::get('/auth-user', [AuthenticatedSessionController::class, 'me']);
+Route::get('/auth-user', [AuthenticatedSessionController::class, 'me'])->middleware(['auth:api']);
 
 Route::post('/reset-password', [NewPasswordController::class, 'store'])
     ->middleware('guest')
