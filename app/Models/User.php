@@ -23,6 +23,8 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'otp_created_at',
+        'otp'
     ];
 
     /**
@@ -33,6 +35,8 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+        'otp_created_at',
+        'otp'
     ];
 
     /**
@@ -43,6 +47,7 @@ class User extends Authenticatable implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'otp_created_at' => 'datetime'
     ];
 
     /**
