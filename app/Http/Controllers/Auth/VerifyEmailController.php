@@ -38,6 +38,12 @@ class VerifyEmailController extends Controller
         $request->validate(['email' => 'required|exists:users']);
 
         $otp = rand(1001, 9999);
-        User::where('email', $request->email)->updat(['otp' => Hash::make($otp)]);
+        $user = User::create([
+            // 'name' => $request->name,
+            'email' => $request->email,
+            // 'password' => Hash::make($request->password),
+            'otp' => Hash::make($otp), 'otp_created_at' => now()
+        ]);
+        // User::where('email', $request->email)->update(['otp' => Hash::make($otp), 'otp_created_at' => now()]);
     }
 }
