@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ParticipationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
+
+Route::post('test', [ParticipationController::class, 'store']);
 
 require __DIR__.'/auth.php';

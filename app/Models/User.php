@@ -52,7 +52,8 @@ class User extends Authenticatable implements JWTSubject
      */
     public function competitions(): BelongsToMany
     {
-        return $this->belongsToMany(Competition::class);
+        return $this->belongsToMany(Competition::class)
+            ->withPivot(['team_code', 'created_at', 'allowed', 'id']);
     }
 
     /**
