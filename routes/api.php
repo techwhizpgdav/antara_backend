@@ -24,4 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);
-Route::apiResource('categories',CategoryController::class);
+Route::apiResource('categories',CategoryController::class)->middleware('auth:api');
