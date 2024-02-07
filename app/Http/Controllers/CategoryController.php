@@ -59,7 +59,7 @@ class CategoryController extends Controller
         $record = Category::findOrFail($id);
         $update = $record->update($request->only(['name', 'background_image']));
 
-        return new CategoryResource($update);
+        return response()->json(['data' => $update]);
 
     }
 
@@ -71,6 +71,6 @@ class CategoryController extends Controller
         //
         $record = Category::findOrFail($id);
         $delete = $record->delete();
-        return new CategoryResource($delete);
+        return response()->json(['data' => $delete]);
     }
 }
