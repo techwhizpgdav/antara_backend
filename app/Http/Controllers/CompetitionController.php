@@ -57,13 +57,13 @@ class CompetitionController extends Controller
             'society_id' => 'required|integer|exists:societies,id',
             'title' => 'required|string|max:200|unique:competitions,title,' . $id . ',id',
             'image_url' => 'required|url',
-            'description' => 'required',
+            'description' => 'required|string',
             'rules' => 'required|json',
             'queries_to' => 'required|json',
         ]);
 
         $record = Competition::findOrFail($id);
-        $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to']));
+        $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to', 'description']));
 
         return response()->json(['data' => $update]);
     }
