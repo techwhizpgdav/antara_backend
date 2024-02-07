@@ -57,6 +57,7 @@ class CompetitionController extends Controller
             'society_id' => 'required|integer|exists:societies,id',
             'title' => 'required|string|max:200|unique:competitions,title,' . $id . ',id',
             'image_url' => 'required|url',
+            'description' => 'required',
             'rules' => 'required|json',
             'queries_to' => 'required|json',
         ]);
