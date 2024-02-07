@@ -39,8 +39,8 @@ class ParticipationController extends Controller
             return $this->joinTeam($request->team_code);
         }
 
-        $user = User::find($request->user()->id ?? 1);
-        $competition = Competition::find($request->competition_id);
+        $user = User::findOrFail($request->user()->id ?? 1);
+        $competition = Competition::findOrFail($request->competition_id);
 
         $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6)]);
 
@@ -88,9 +88,9 @@ class ParticipationController extends Controller
             ]);
         }
 
-        $competition = Competition::find($record->competition_id);
+        $competition = Competition::findOrFail($record->competition_id);
         $this->validateTeam($code, $competition);
-        $user = User::find(auth()->user()->id ?? 1);
+        $user = User::findOrFail(auth()->user()->id ?? 1);
 
         $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code]);
         return $data;

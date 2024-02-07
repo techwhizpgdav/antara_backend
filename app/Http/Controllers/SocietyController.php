@@ -38,7 +38,7 @@ class SocietyController extends Controller
      */
     public function show(string $id)
     {
-        $record = Society::find($id);
+        $record = Society::findOrFail($id);
         return new SocietyResource($record);
     }
 
@@ -53,7 +53,7 @@ class SocietyController extends Controller
             'description' => 'required|string',
         ]);
 
-        $record = Society::find($id);
+        $record = Society::findOrFail($id);
         $update = $record->update($request->only(['name', 'logo', 'description']));
 
         return response()->json(['data' => $update], 200);
@@ -64,7 +64,7 @@ class SocietyController extends Controller
      */
     public function destroy(string $id)
     {
-        $record = Society::find($id);
+        $record = Society::findOrFail($id);
         $delete = $record->delete();
         return response()->json(['data' => $delete], 200);
     }

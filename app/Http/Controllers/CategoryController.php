@@ -42,7 +42,7 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         //
-        $record = Category::find($id);
+        $record = Category::findOrFail($id);
         return new CategoryResource($record);
     }
 
@@ -56,7 +56,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:100|unique:categories,name',
             'background_image' => 'required|url',
         ]);
-        $record = Category::find($id);
+        $record = Category::findOrFail($id);
         $update = $record->update($request->only(['name', 'background_image']));
 
         return new CategoryResource($update);
@@ -69,7 +69,7 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
-        $record = Category::find($id);
+        $record = Category::findOrFail($id);
         $delete = $record->delete();
         return new CategoryResource($delete);
     }
