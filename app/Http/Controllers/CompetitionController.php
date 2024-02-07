@@ -55,7 +55,7 @@ class CompetitionController extends Controller
         $request->validate([
             'category_id' => 'required|integer|exists:categories,id',
             'society_id' => 'required|integer|exists:societies,id',
-            'title' => 'required|string|max:200',
+            'title' => 'required|string|max:200|unique:competitions,title,' . $id . ',id',
             'image_url' => 'required|url',
             'rules' => 'required|json',
             'queries_to' => 'required|json',
