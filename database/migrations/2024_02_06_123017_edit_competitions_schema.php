@@ -15,7 +15,7 @@ return new class extends Migration
             $table->text('description')->after('title');
             $table->integer('minimum_size', false, true)->after('rules');
             $table->integer('maximum_size', false, true)->after('minimum_size');
-            $table->json('images')->after('description');
+            $table->json('images')->nullable()->after('description');
         });
 
         Schema::table('users', function (Blueprint $table) {
