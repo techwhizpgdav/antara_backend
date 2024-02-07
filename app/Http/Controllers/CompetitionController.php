@@ -60,6 +60,8 @@ class CompetitionController extends Controller
             'description' => 'required|string',
             'rules' => 'required|json',
             'queries_to' => 'required|json',
+            'minimum_size' => 'required|integer|min:1',
+            'maximum_size' => 'required|integer|min:1'
         ]);
 
         $record = Competition::findOrFail($id);

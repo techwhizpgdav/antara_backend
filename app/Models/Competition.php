@@ -20,6 +20,7 @@ class Competition extends Model
         'image_url',
         'rules',
         'queries_to',
+        'description',
         'minimum_size',
         'maximum_size'
     ];
