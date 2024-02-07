@@ -49,7 +49,7 @@ class SocietyController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'logo' => 'nullable|mimes:jpg,png|max:2048',
+            'logo' => 'required',
             'description' => 'required|string',
         ]);
 
