@@ -64,7 +64,7 @@ class CompetitionController extends Controller
         $record = Competition::findOrFail($id);
         $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to']));
 
-        return new CompetitionResource($update);
+        return response()->json(['data' => $update]);
     }
 
     /**
@@ -75,6 +75,6 @@ class CompetitionController extends Controller
         //
         $record = Competition::findOrFail($id);
         $delete = $record->delete();
-        return response()->json(['data' => $delete], 200);
+        return response()->json(['data' => $delete]);
     }
 }
