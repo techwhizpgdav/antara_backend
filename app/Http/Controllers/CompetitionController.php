@@ -30,6 +30,9 @@ class CompetitionController extends Controller
             'image_url' => 'required|url',
             'rules' => 'required|json',
             'queries_to' => 'required|json',
+            'description' => 'required|string',
+            'minimum_size' => 'required|integer|min:1',
+            'maximum_size' => 'required|integer|min:1'
         ]);
 
         $data = Competition::create($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to']));
