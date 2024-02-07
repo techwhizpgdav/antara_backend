@@ -53,7 +53,7 @@ class CategoryController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required|string|max:100|unique:categories,name',
+            'name' => 'required|string|max:100|unique:categories,name,except,id',
             'background_image' => 'required|url',
         ]);
         $record = Category::findOrFail($id);
