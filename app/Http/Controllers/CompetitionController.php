@@ -35,7 +35,7 @@ class CompetitionController extends Controller
             'maximum_size' => 'required|integer|min:1'
         ]);
 
-        $data = Competition::create($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to']));
+        $data = Competition::create($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size']));
 
         return new CompetitionResource($data);
     }
@@ -68,7 +68,7 @@ class CompetitionController extends Controller
         ]);
 
         $record = Competition::findOrFail($id);
-        $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to', 'description']));
+        $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size']));
 
         return response()->json(['data' => $update]);
     }
