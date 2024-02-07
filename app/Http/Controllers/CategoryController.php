@@ -32,8 +32,8 @@ class CategoryController extends Controller
             'background_image' => 'required|url',
         ]);
 
-       $data = Category::create($request->only(['name', 'background_image']));
-       return new CategoryResource($data);
+        $data = Category::create($request->only(['name', 'background_image']));
+        return new CategoryResource($data);
     }
 
     /**
@@ -53,14 +53,13 @@ class CategoryController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required|string|max:100|unique:categories,name,except,id',
+            'name' => 'required|string|max:100|unique:categories,name,' . $id . ',id',
             'background_image' => 'required|url',
         ]);
         $record = Category::findOrFail($id);
         $update = $record->update($request->only(['name', 'background_image']));
 
         return response()->json(['data' => $update]);
-
     }
 
     /**
