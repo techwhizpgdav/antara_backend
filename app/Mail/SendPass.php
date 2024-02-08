@@ -30,6 +30,7 @@ class SendPass extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            
             subject: 'Send Pass',
         );
     }
@@ -40,7 +41,7 @@ class SendPass extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.pass',
+            view: 'pass',
         );
     }
 

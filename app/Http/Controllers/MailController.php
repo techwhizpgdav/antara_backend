@@ -14,7 +14,7 @@ class MailController extends Controller
             'title'=>'mail from web',
             'body' => 'this is mail',
         ];
-        Mail::to('web@gmail.com')->send(new SendPass($maildata));
+        Mail::to('14911suraj@gmail.com')->send(new SendPass($maildata));
 
         dd('Email Sent');
         
