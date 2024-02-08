@@ -18,11 +18,10 @@ class EmailVerificationNotificationController extends Controller
     public function store(Request $request): JsonResponse|RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return response()->json(['status' => 'email-already-verified']);
         }
 
-        // $request->user()->sendEmailVerificationNotification();
-        $header = $request->header(['Authorization']);
+        $header = $request->header('Authorization');
         $token = str_replace("Bearer", "", $header);
         $url = url("/verify-email?token=$token");
         Mail::to($request->user()->email)->send(new SendVerificationMail($url));
