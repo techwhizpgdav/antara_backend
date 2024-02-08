@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SocietyController;
 use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ParticipationController;
 
 /*
@@ -31,3 +32,4 @@ Route::apiResource('participations', ParticipationController::class);
 Route::post('test', function(){
     return ['King of Pirates' => "Luffy"];
 })->middleware(['auth:api', 'verified']);
+Route::apiResource('sendpass',MailController::class);
