@@ -48,7 +48,7 @@ class SocietyController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255|unique:socities,name,' . $id . ',id',
+            'name' => 'required|string|max:255|unique:societies,name,' . $id . ',id',
             'logo' => 'required',
             'description' => 'required|string',
         ]);
