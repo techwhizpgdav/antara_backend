@@ -26,9 +26,12 @@ Route::post('/reset-password', [NewPasswordController::class, 'store'])
     ->middleware('guest')
     ->name('password.store');
 
-Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
-    ->middleware(['auth:api', 'signed', 'throttle:6,1'])
-    ->name('verification.verify');
+// Route::get('/verify-email/{id}/{hash}', VerifyEmailController::class)
+//     ->middleware(['auth:api', 'signed', 'throttle:6,1'])
+//     ->name('verification.verify');
+Route::get('/verify-email', [VerifyEmailController::class, 'verifyEmail'])
+    ->middleware(['throttle:6,1']);
+    // ->name('verification.verify');
 
 Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
     ->middleware(['auth:api', 'throttle:6,1'])
