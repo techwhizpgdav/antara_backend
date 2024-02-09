@@ -72,4 +72,12 @@ class CategoryController extends Controller
         $delete = $record->delete();
         return response()->json(['data' => $delete]);
     }
+
+    public function competitions(Category $category)
+    {
+        // Fetch competitions belonging to the category
+        $competitions = $category->competitions()->get();
+
+        return response()->json($competitions);
+    }
 }

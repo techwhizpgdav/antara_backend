@@ -28,6 +28,7 @@ Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('participations', ParticipationController::class);
+Route::get('categories/{category}/competitions', [CategoryController::class, 'competitions']);
 
 Route::post('test', function(){
     return ['King of Pirates' => "Luffy"];
