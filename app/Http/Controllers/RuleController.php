@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rule;
 use Illuminate\Http\Request;
+use App\Http\Resources\GeneralResource;
 
 class RuleController extends Controller
 {
@@ -19,7 +21,14 @@ class RuleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'round_id' => ['required', 'exists:rounds,id'],
+            'statement' => ['required', 'string'],
+        ]);
+
+        $data = Rule::create($request->only(['round_id', 'statement']));
+
+        return new GeneralResource($data);
     }
 
     /**

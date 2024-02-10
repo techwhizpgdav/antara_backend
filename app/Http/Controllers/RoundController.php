@@ -28,7 +28,7 @@ class RoundController extends Controller
             'name' => ['required', 'string']
         ]);
 
-        $data = Round::store($request->only(['competition_id' ,'mode' ,'name']));
+        $data = Round::create($request->only(['competition_id' ,'mode' ,'name']));
 
         return new GeneralResource($data);
     }
