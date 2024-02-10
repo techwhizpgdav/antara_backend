@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Round;
 use App\Models\Society;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -45,7 +47,7 @@ class Competition extends Model
         return $this->belongsTo(Society::class);
     }
 
-    
+
 
     /**
      * The user that belong to the Competition
@@ -55,5 +57,15 @@ class Competition extends Model
     public function user(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Get all of the rounds for the Competition
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function rounds(): HasMany
+    {
+        return $this->hasMany(Round::class);
     }
 }
