@@ -8,6 +8,8 @@ use App\Http\Controllers\SocietyController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ParticipationController;
+use App\Http\Controllers\RoundController;
+use App\Http\Controllers\RuleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,8 @@ Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('participations', ParticipationController::class);
+Route::apiResource('rules', RuleController::class);
+Route::apiResource('rounds', RoundController::class);
 Route::get('categories/{category}/competitions', [CategoryController::class, 'competitions']);
 
 Route::post('test', function(){
