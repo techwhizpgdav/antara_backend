@@ -45,6 +45,8 @@ class Competition extends Model
         return $this->belongsTo(Society::class);
     }
 
+    
+
     /**
      * The user that belong to the Competition
      *

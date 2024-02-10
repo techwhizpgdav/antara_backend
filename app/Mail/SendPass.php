@@ -13,12 +13,15 @@ class SendPass extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $maildata;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($maildata)
     {
         //
+        $this->maildata=$maildata;
     }
 
     /**
@@ -27,6 +30,7 @@ class SendPass extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
+            
             subject: 'Send Pass',
         );
     }
@@ -37,7 +41,7 @@ class SendPass extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'pass',
         );
     }
 
