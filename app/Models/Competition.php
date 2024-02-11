@@ -22,6 +22,10 @@ class Competition extends Model
         'image_url',
         'rules',
         'queries_to',
+        'venue',
+        'starts_at',
+        'ends_at',
+        'date',
         'description',
         'minimum_size',
         'maximum_size'
