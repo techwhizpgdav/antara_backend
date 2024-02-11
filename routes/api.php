@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\RuleController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoundController;
 use App\Http\Controllers\SocietyController;
 use App\Http\Controllers\CategoryController;
@@ -34,9 +35,10 @@ Route::apiResource('participations', ParticipationController::class);
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
-Route::apiResource('teams', TeamController::class);
 
-Route::get('teams/{role}', [TeamController::class, 'getTeamMembersByRole']);
+Route::get('organizer-web-developer-users', [UserController::class, 'getOrganizerAndWebDeveloperUsers']);
+
+
 
 Route::post('test', function () {
     return ['King of Pirates' => "Luffy"];
