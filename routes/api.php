@@ -36,7 +36,7 @@ Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
-Route::get('organizer-web-developer-users', [UserController::class, 'getOrganizerAndWebDeveloperUsers']);
+Route::get('users/{role}', [UserController::class, 'index']);
 
 
 

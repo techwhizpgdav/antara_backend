@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
+use App\Http\Resources\GeneralResource;
+use App\Models\User;
 
 class UserController extends Controller
 {
-    
-    public function getOrganizerAndWebDeveloperUsers(Request $request)
+
+    public function index($role)
     {
-
-        $organizerUsers = Role::findByName('organizer')->users;
-        $webDeveloperUsers = Role::findByName('web_development')->users;
-
-       
-        $combinedUsers = $organizerUsers->merge($webDeveloperUsers);
-
-        return view('organizer_web_developer_users', ['users' => $combinedUsers]);
+        $data = User::role($role)->get();
+        return new GeneralResource($data);
     }
 }
