@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use App\Models\Competition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SocietyController;
-use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\ParticipationController;
-use App\Http\Controllers\RoundController;
 use App\Http\Controllers\RuleController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\RoundController;
+use App\Http\Controllers\SocietyController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\ParticipationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,8 +34,12 @@ Route::apiResource('participations', ParticipationController::class);
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
 Route::get('categories/{category}/competitions', [CategoryController::class, 'competitions']);
+Route::apiResource('teams',TeamController::class);
+
+Route::get('teams/{role}/teams', [TeamController::class, 'getTeamMembersByRole'])->whereIn('role', ['organizer','web_development']);
 
 Route::post('test', function(){
     return ['King of Pirates' => "Luffy"];
 })->middleware(['auth:api', 'verified']);
+
 Route::apiResource('sendpass',MailController::class);
