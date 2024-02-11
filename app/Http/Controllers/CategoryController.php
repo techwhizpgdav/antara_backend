@@ -6,7 +6,9 @@ use App\Models\Category;
 use App\Models\Competition;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\GeneralResource;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryController extends Controller
 {
@@ -73,13 +75,11 @@ class CategoryController extends Controller
         return response()->json(['data' => $delete]);
     }
 
-    public function competitions(Category $category)
+
+
+    public function competitions(string $id): JsonResource
     {
-        // Fetch competitions belonging to the category
-        $competitions = $category->competitions()->get();
-
-        return response()->json($competitions);
+        $data = Competition::where(['category_id' => $id])->get();
+        return new GeneralResource($data);
     }
-
-    
 }

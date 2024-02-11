@@ -33,13 +33,13 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('participations', ParticipationController::class);
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
-Route::get('categories/{category}/competitions', [CategoryController::class, 'competitions']);
-Route::apiResource('teams',TeamController::class);
+Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
+Route::apiResource('teams', TeamController::class);
 
-Route::get('teams/{role}/teams', [TeamController::class, 'getTeamMembersByRole'])->whereIn('role', ['organizer','web_development']);
+Route::get('teams/{role}', [TeamController::class, 'getTeamMembersByRole']);
 
-Route::post('test', function(){
+Route::post('test', function () {
     return ['King of Pirates' => "Luffy"];
 })->middleware(['auth:api', 'verified']);
 
-Route::apiResource('sendpass',MailController::class);
+Route::apiResource('sendpass', MailController::class);
