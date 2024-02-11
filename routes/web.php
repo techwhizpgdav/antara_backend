@@ -21,4 +21,5 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
+
 require __DIR__.'/auth.php';
