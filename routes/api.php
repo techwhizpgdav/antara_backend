@@ -37,7 +37,7 @@ Route::apiResource('rounds', RoundController::class);
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
 Route::get('users/{role}', [UserController::class, 'index']);
-Route::get('competitions/grouped_by_day', [CompetitionController::class, 'CompeByDay']);
+Route::get('competition/grouped-by', [CompetitionController::class, 'compByDay']);
 
 
 

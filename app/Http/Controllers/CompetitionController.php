@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Competition;
 use Illuminate\Http\Request;
-use App\Http\Resources\CompetitionResource;
+use Illuminate\Support\Facades\DB;
 use App\Http\Resources\GeneralResource;
+use App\Http\Resources\CompetitionResource;
 
 class CompetitionController extends Controller
 {
@@ -85,13 +86,12 @@ class CompetitionController extends Controller
         return response()->json(['data' => $delete]);
     }
 
-    public function CompeByDay()
+    public function compByDay()
     {
-        $cbyd = Competition::all()->groupBy(function ($competition) {
-            return $competition->date->format('l');
-        });
+        $data = Competition::select(DB::raw('DAYNAME(date) as day'), 'id', 'title', 'date')
+            ->get()
+            ->groupBy('day');
 
-        return new GeneralResource($cbyd);
+        return new GeneralResource($data);
     }
-
 }
