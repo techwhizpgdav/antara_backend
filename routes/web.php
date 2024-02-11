@@ -16,15 +16,7 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 */
 
 Route::get('/', function () {
-    return ['Laravel' => app()->version()];
+    return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
-
-Route::post('test', function(){
-    return ['King of Pirates' => "Luffy"];
-})->middleware(['auth:api', 'verified']);
-
-Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
-    ->middleware(['auth:api', 'throttle:6,1'])
-    ->name('verification.send');
 
 require __DIR__.'/auth.php';

@@ -45,7 +45,7 @@ class CompetitionController extends Controller
      */
     public function show(string $id)
     {
-        $record = Competition::with(['category', 'society'])->findOrFail($id);
+        $record = Competition::with(['category', 'society', 'rounds.rules'])->findOrFail($id);
         return new CompetitionResource($record);
     }
 
