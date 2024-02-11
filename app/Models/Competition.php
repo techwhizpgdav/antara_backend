@@ -23,10 +23,14 @@ class Competition extends Model
         'rules',
         'queries_to',
         'venue',
-        'starts_at',
+        'start_at',
         'ends_at',
         'date',
+        'upi_id',
+        'team_fee',
+        'individual_fee',
         'description',
+        'paid_event',
         'minimum_size',
         'maximum_size'
     ];

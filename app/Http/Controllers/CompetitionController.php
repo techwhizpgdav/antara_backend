@@ -27,17 +27,23 @@ class CompetitionController extends Controller
     {
         $request->validate([
             'category_id' => 'required|integer|exists:categories,id',
-            'society_id' => 'required|integer|exists:societies,id',
-            'title' => 'required|string|max:200|unique:competitions',
             'image_url' => 'required|url',
-            'rules' => 'required|json',
-            'queries_to' => 'required|json',
             'description' => 'required|string',
             'minimum_size' => 'required|integer|min:1',
-            'maximum_size' => 'required|integer|min:1'
+            'maximum_size' => 'required|integer|min:1',
+            'start_at' => 'required|date_format:H:i:s',
+            'ends_at' => 'required|date_format:H:i:s',
+            'date' => 'required|date',
+            'venue' => 'required|string',
+            'paid_event' => 'required|boolean',
+            'team_fee' => 'required_if:paid_event,true',
+            'individual_fee' => 'required_if:paid_event,true',
+            'upi_id' => 'required_if:paid_event,true'
         ]);
 
-        $data = Competition::create($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size']));
+        $data = Competition::create($request->only(
+            ['category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
+        ));
 
         return new CompetitionResource($data);
     }
@@ -59,18 +65,25 @@ class CompetitionController extends Controller
         //
         $request->validate([
             'category_id' => 'required|integer|exists:categories,id',
-            'society_id' => 'required|integer|exists:societies,id',
             'title' => 'required|string|max:200|unique:competitions,title,' . $id . ',id',
             'image_url' => 'required|url',
             'description' => 'required|string',
-            'rules' => 'required|json',
-            'queries_to' => 'required|json',
             'minimum_size' => 'required|integer|min:1',
-            'maximum_size' => 'required|integer|min:1'
+            'maximum_size' => 'required|integer|min:1',
+            'start_at' => 'required|date_format:H:i:s',
+            'ends_at' => 'required|date_format:H:i:s',
+            'date' => 'required|date',
+            'venue' => 'required|string',
+            'paid_event' => 'required|boolean',
+            'team_fee' => 'required_if:paid_event,true',
+            'individual_fee' => 'required_if:paid_event,true',
+            'upi_id' => 'required_if:paid_event,true'
         ]);
 
         $record = Competition::findOrFail($id);
-        $update = $record->update($request->only(['category_id', 'society_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size']));
+        $update = $record->update($request->only(
+            ['category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
+        ));
 
         return response()->json(['data' => $update]);
     }
