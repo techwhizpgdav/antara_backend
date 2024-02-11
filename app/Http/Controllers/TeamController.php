@@ -87,7 +87,7 @@ class TeamController extends Controller
     {
         // Validate the role here if needed
         
-        $teamMembers = Team::where('role', $role)->get(['name', 'position', 'mobile', 'linked_in', 'github', 'instagram']);
+        $teamMembers = Team::where('role', $role)->get();
 
         return response()->json($teamMembers);
     }
