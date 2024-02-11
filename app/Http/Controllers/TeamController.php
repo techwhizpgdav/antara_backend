@@ -29,7 +29,7 @@ class TeamController extends Controller
             'photo' => 'required|url',
             'position'=>'required|string|max:200',
             'mobile' => 'required|string|max:20',
-            'role' => 'required|string|in:organizing,web_development',
+            'role' => 'required|string|in:organizer,web_development',
             'linked_in' => 'nullable|url|max:200',
             'github' => 'nullable|url|max:200',
             'instagram' => 'nullable|url|max:200',
@@ -60,7 +60,7 @@ class TeamController extends Controller
             'photo' => 'required|url',
             'position'=>'required|string|max:200',
             'mobile' => 'required|string|max:20',
-            'role' => 'required|string|in:organizing,web_development',
+            'role' => 'required|string|in:organizer,web_development',
             'linked_in' => 'nullable|url|max:200',
             'github' => 'nullable|url|max:200',
             'instagram' => 'nullable|url|max:200',
@@ -69,7 +69,7 @@ class TeamController extends Controller
         $record = Team::findOrFail($id);
         $update = $record->update($request->only(['name','photo','position','mobile','role','linked_in','github','instagram']));
 
-        return response()->json(['data' => $update]);
+        return response()->json($update);
     }
 
     /**
@@ -83,12 +83,11 @@ class TeamController extends Controller
         return response()->json(['data' => $delete]);
     }
 
-    public function getTeamMembersByRole($role)
+    public function getTeamMembersByRole(string $role)
     {
         // Validate the role here if needed
         
-       
-        $teamMembers = Team::where('role', $role)->get();
+        $teamMembers = Team::where('role', $role)->get(['name', 'position', 'mobile', 'linked_in', 'github', 'instagram']);
 
         return response()->json($teamMembers);
     }
