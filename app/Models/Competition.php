@@ -27,6 +27,7 @@ class Competition extends Model
         'ends_at',
         'date',
         'upi_id',
+        'tag_line',
         'team_fee',
         'individual_fee',
         'description',

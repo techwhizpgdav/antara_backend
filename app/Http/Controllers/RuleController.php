@@ -13,7 +13,8 @@ class RuleController extends Controller
      */
     public function index()
     {
-        //
+        $data = Rule::with(['round.competition'])->get();
+        return new GeneralResource($data);
     }
 
     /**

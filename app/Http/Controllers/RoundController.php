@@ -14,7 +14,8 @@ class RoundController extends Controller
      */
     public function index()
     {
-        //
+        $data = Round::with(['competition.society'])->get();
+        return new GeneralResource($data);
     }
 
     /**

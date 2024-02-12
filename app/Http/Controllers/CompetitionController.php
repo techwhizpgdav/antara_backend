@@ -38,11 +38,12 @@ class CompetitionController extends Controller
             'paid_event' => 'required|boolean',
             'team_fee' => 'required_if:paid_event,true',
             'individual_fee' => 'required_if:paid_event,true',
-            'upi_id' => 'required_if:paid_event,true'
+            'upi_id' => 'required_if:paid_event,true',
+            'tag_line' => 'nullable|string'
         ]);
 
         $data = Competition::create($request->only(
-            ['category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
+            ['tag_line', 'category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
         ));
 
         return new CompetitionResource($data);
@@ -77,12 +78,13 @@ class CompetitionController extends Controller
             'paid_event' => 'required|boolean',
             'team_fee' => 'required_if:paid_event,true',
             'individual_fee' => 'required_if:paid_event,true',
-            'upi_id' => 'required_if:paid_event,true'
+            'upi_id' => 'required_if:paid_event,true',
+            'tag_line' => 'nullable|string'
         ]);
 
         $record = Competition::findOrFail($id);
         $update = $record->update($request->only(
-            ['category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
+            ['tag_line', 'category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
         ));
 
         return response()->json(['data' => $update]);
