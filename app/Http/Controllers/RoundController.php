@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\GeneralResource;
+use App\Models\User;
 use App\Models\Round;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Resources\GeneralResource;
 
 class RoundController extends Controller
 {
@@ -14,7 +15,11 @@ class RoundController extends Controller
      */
     public function index()
     {
-        //
+        $user = User::find(1);
+        $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
+            return $competition->rounds;
+        });
+        return new GeneralResource($usersRounds);
     }
 
     /**
@@ -46,7 +51,14 @@ class RoundController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $round = Round::findOrFail($id);
+        Round::where(['id' => $id])->update([
+            'competition_id' => $request->competition_id ?? $round->competition_id,
+            'mode' => $request->mode ?? $round->mode,
+            'name' => $request->name ?? $round->name
+        ]);
+
+        return new GeneralResource($round);
     }
 
     /**

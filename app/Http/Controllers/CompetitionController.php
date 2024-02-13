@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\GeneralResource;
 use App\Http\Resources\CompetitionResource;
+use App\Models\User;
 
 class CompetitionController extends Controller
 {
@@ -15,9 +16,9 @@ class CompetitionController extends Controller
      */
     public function index()
     {
-        $data = Competition::with(['category', 'society'])->get();
-
-        return new CompetitionResource($data);
+        $user = User::find(1);
+        $data = $user->societyCompetitions;
+        return new GeneralResource($data);
     }
 
     /**
@@ -38,11 +39,12 @@ class CompetitionController extends Controller
             'paid_event' => 'required|boolean',
             'team_fee' => 'required_if:paid_event,true',
             'individual_fee' => 'required_if:paid_event,true',
-            'upi_id' => 'required_if:paid_event,true'
+            'upi_id' => 'required_if:paid_event,true',
+            'tag_line' => 'nullable|string'
         ]);
 
         $data = Competition::create($request->only(
-            ['category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
+            ['tag_line', 'category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
         ));
 
         return new CompetitionResource($data);
@@ -60,12 +62,12 @@ class CompetitionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Competition $competition)
     {
-        //
+        $this->authorize('update', $competition);
         $request->validate([
             'category_id' => 'required|integer|exists:categories,id',
-            'title' => 'required|string|max:200|unique:competitions,title,' . $id . ',id',
+            'title' => 'required|string|max:200|unique:competitions,title,' . $competition->id . ',id',
             'image_url' => 'required|url',
             'description' => 'required|string',
             'minimum_size' => 'required|integer|min:1',
@@ -77,12 +79,12 @@ class CompetitionController extends Controller
             'paid_event' => 'required|boolean',
             'team_fee' => 'required_if:paid_event,true',
             'individual_fee' => 'required_if:paid_event,true',
-            'upi_id' => 'required_if:paid_event,true'
+            'upi_id' => 'required_if:paid_event,true',
+            'tag_line' => 'nullable|string'
         ]);
 
-        $record = Competition::findOrFail($id);
-        $update = $record->update($request->only(
-            ['category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
+        $update = $competition->update($request->only(
+            ['tag_line', 'category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
         ));
 
         return response()->json(['data' => $update]);

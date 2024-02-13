@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\CompetitionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
+
+Route::get('test', [CompetitionController::class, 'index']);
 
 
 require __DIR__.'/auth.php';
