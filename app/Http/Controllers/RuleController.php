@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rule;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\GeneralResource;
 
@@ -13,8 +14,11 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $data = Rule::with(['round.competition'])->get();
-        return new GeneralResource($data);
+        $user = User::find(1);
+        $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
+            return $competition->rules;
+        });
+        return new GeneralResource($usersRounds);
     }
 
     /**

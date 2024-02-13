@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Rule;
 use App\Models\Round;
 use App\Models\Society;
 use App\Models\Category;
@@ -10,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Competition extends Model
 {
@@ -75,6 +77,16 @@ class Competition extends Model
      */
     public function rounds(): HasMany
     {
-        return $this->hasMany(Round::class);
+        return $this->hasMany(Round::class)->with('competition');
+    }
+
+    /**
+     * Get all of the rules for the Competition
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function rules(): HasManyThrough
+    {
+        return $this->hasManyThrough(Rule::class, Round::class);
     }
 }

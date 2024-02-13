@@ -37,6 +37,6 @@ class Round extends Model
      */
     public function rules(): HasMany
     {
-        return $this->hasMany(Rule::class);
+        return $this->hasMany(Rule::class)->with('round');
     }
 }
