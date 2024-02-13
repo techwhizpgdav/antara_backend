@@ -48,7 +48,7 @@ class RoundController extends Controller
     public function update(Request $request, string $id)
     {
         $round = Round::findOrFail($id);
-        Round::where(['id', $id])->update([
+        Round::where(['id' => $id])->update([
             'competition_id' => $request->competition_id ?? $round->competition_id,
             'mode' => $request->mode ?? $round->mode,
             'name' => $request->name ?? $round->name
