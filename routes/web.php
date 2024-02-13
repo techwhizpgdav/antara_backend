@@ -22,7 +22,5 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-Route::get('test', [CompetitionController::class, 'index']);
-
 
 require __DIR__.'/auth.php';

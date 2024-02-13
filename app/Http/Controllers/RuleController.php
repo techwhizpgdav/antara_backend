@@ -9,12 +9,16 @@ use App\Http\Resources\GeneralResource;
 
 class RuleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['only' => ['index']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $user = User::find(1);
+        $user = auth()->user();
         $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
             return $competition->rules;
         });

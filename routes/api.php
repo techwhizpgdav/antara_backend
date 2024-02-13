@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Models\Competition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,9 @@ use App\Http\Controllers\ParticipationController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
+Route::get('/auth-user', [AuthenticatedSessionController::class, 'me'])->middleware(['auth:api']);
 
 Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);

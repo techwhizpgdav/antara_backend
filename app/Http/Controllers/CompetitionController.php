@@ -7,16 +7,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\GeneralResource;
 use App\Http\Resources\CompetitionResource;
+use App\Models\SocietyUser;
 use App\Models\User;
+use Carbon\Carbon;
 
 class CompetitionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['only' => ['index', 'store']]);
+        $this->middleware('role:member', ['only' => ['store', 'update', 'delete']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $user = User::find(1);
+        $user = auth()->user();
         $data = $user->societyCompetitions;
         return new GeneralResource($data);
     }
@@ -32,8 +40,8 @@ class CompetitionController extends Controller
             'description' => 'required|string',
             'minimum_size' => 'required|integer|min:1',
             'maximum_size' => 'required|integer|min:1',
-            'start_at' => 'required|date_format:H:i:s',
-            'ends_at' => 'required|date_format:H:i:s',
+            'start_at' => 'required|date_format:H:i',
+            'ends_at' => 'required|date_format:H:i',
             'date' => 'required|date',
             'venue' => 'required|string',
             'paid_event' => 'required|boolean',
@@ -43,9 +51,33 @@ class CompetitionController extends Controller
             'tag_line' => 'nullable|string'
         ]);
 
-        $data = Competition::create($request->only(
-            ['tag_line', 'category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
-        ));
+        $society = SocietyUser::where('user_id', auth()->user()->id)->first();
+
+        if (!$society) {
+            abort(403, "This action is unauthorized");
+        }
+
+        $data = Competition::create(
+            [
+                'society_id' => $society->society_id,
+                'tag_line' => $request->tag_line,
+                'category_id' => $request->category_id,
+                'title' => $request->title,
+                'image_url' => $request->image_url,
+                'queries_to' => $request->queries_to,
+                'description' => $request->description,
+                'minimum_size' => $request->minimum_size,
+                'maximum_size' => $request->maximum_size,
+                'start_at' => Carbon::parse($request->start_at)->format('H:i:s'),
+                'ends_at' => Carbon::parse($request->ends_at)->format('H:i:s'),
+                'date' => $request->date,
+                'venue' => $request->venue,
+                'team_fee' => $request->team_fee,
+                'individual_fee' => $request->individual_fee,
+                'upi_id' => $request->upi_id,
+                'paid_event' => $request->paid_event
+            ]
+        );
 
         return new CompetitionResource($data);
     }
@@ -83,9 +115,24 @@ class CompetitionController extends Controller
             'tag_line' => 'nullable|string'
         ]);
 
-        $update = $competition->update($request->only(
-            ['tag_line', 'category_id', 'title', 'image_url', 'rules', 'queries_to', 'description', 'minimum_size', 'maximum_size', 'start_at', 'ends_at', 'date', 'venue', 'team_fee', 'individual_fee', 'upi_id', 'paid_event']
-        ));
+        $update = $competition->update([
+            'tag_line' => $request->tag_line,
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'image_url' => $request->image_url,
+            'queries_to' => $request->queries_to,
+            'description' => $request->description,
+            'minimum_size' => $request->minimum_size,
+            'maximum_size' => $request->maximum_size,
+            'start_at' => Carbon::parse($request->start_at)->format('H:i:s'),
+            'ends_at' => Carbon::parse($request->ends_at)->format('H:i:s'),
+            'date' => $request->date,
+            'venue' => $request->venue,
+            'team_fee' => $request->team_fee,
+            'individual_fee' => $request->individual_fee,
+            'upi_id' => $request->upi_id,
+            'paid_event' => $request->paid_event
+        ]);
 
         return response()->json(['data' => $update]);
     }

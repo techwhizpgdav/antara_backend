@@ -58,7 +58,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function me(): JsonResource
     {
-        return new GeneralResource(auth()->user());
+        $user = auth()->user();
+        return new GeneralResource(['user' => $user, 'role' => $user->roles]);
     }
 
     /**

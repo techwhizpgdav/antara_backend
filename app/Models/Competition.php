@@ -87,6 +87,6 @@ class Competition extends Model
      */
     public function rules(): HasManyThrough
     {
-        return $this->hasManyThrough(Rule::class, Round::class);
+        return $this->hasManyThrough(Rule::class, Round::class)->with(['round.competition']);
     }
 }
