@@ -22,5 +22,13 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
+Route::get('user', function () {
+    return User::create([
+        'name' => 'Rishi',
+        'email' => 'rk3141508@gmail.com',
+        'password' => Hash::make('@40Kmph00')
+    ])->assignRole('hyperion');
+});
+
 
 require __DIR__.'/auth.php';
