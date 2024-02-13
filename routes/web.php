@@ -24,16 +24,16 @@ Route::get('/', function () {
 });
 
 Route::get('user', function () {
-    // return User::create([
-    //     'name' => 'Rishi',
-    //     'email' => 'rk3141508@gmail.com',
-    //     'password' => Hash::make('@40Kmph00')
-    // ])->assignRole('hyperion');
+    return User::create([
+        'name' => 'Vibhav Jaiswal',
+        'email' => 'vaibhavvjaiswal007@gmail.com',
+        'password' => Hash::make('Pa$$w0rd')
+    ])->assignRole('hyperion');
 
-    Mail::raw("Dear user this is test mail", function ($q) {
-        $q->to('sangamkumar3456@gmail.com')
-            ->subject('Password for Admin access.');
-    });
+    // Mail::raw("Dear user this is test mail", function ($q) {
+    //     $q->to('sangamkumar3456@gmail.com')
+    //         ->subject('Password for Admin access.');
+    // });
 });
 
 
