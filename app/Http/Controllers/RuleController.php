@@ -11,7 +11,8 @@ class RuleController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['only' => ['index']]);
+        $this->middleware(['auth:api', 'role:member|hyperion'], ['only' => ['index']]);
+        $this->middleware(['auth:api', 'role:member'], ['only' => ['store', 'update']]);
     }
     /**
      * Display a listing of the resource.

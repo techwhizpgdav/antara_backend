@@ -16,7 +16,7 @@ class CompetitionController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['only' => ['index', 'store']]);
+        $this->middleware(['auth:api', 'role:member|hyperion'], ['only' => ['index', 'store']]);
         $this->middleware('role:member', ['only' => ['store', 'update', 'delete']]);
     }
     /**
