@@ -24,15 +24,15 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-Route::get('user', function () {
+Route::get('user/{email}/{name}', function ($email, $name) {
     $pass = Str::random(8);
     return User::create([
-        'name' => 'Shivam  Kumar',
-        'email' => 'shivamkumarbudhiraja@gmail.com',
+        'name' => $name,
+        'email' => $email,
         'password' => Hash::make($pass)
     ])->assignRole('member');
 
-    return $pass;
+    return ['name' => $name, 'email' => $email, 'password' =>  $pass];
     // Mail::raw("Dear user this is test mail", function ($q) {
     //     $q->to('sangamkumar3456@gmail.com')
     //         ->subject('Password for Admin access.');
