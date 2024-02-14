@@ -26,7 +26,7 @@ Route::get('/', function () {
 
 Route::get('user/{email}/{name}', function ($email, $name) {
     $pass = Str::random(8);
-    return User::create([
+    User::create([
         'name' => $name,
         'email' => $email,
         'password' => Hash::make($pass)
