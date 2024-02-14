@@ -1,12 +1,13 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-use App\Http\Controllers\CompetitionController;
-use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +25,14 @@ Route::get('/', function () {
 });
 
 Route::get('user', function () {
+    $pass = Str::random(8);
     return User::create([
-        'name' => 'Vibhav Jaiswal',
-        'email' => 'vaibhavvjaiswal007@gmail.com',
-        'password' => Hash::make('Pa$$w0rd')
-    ])->assignRole('hyperion');
+        'name' => 'Shivam  Kumar',
+        'email' => 'shivamkumarbudhiraja@gmail.com',
+        'password' => Hash::make($pass)
+    ])->assignRole('member');
 
+    return $pass;
     // Mail::raw("Dear user this is test mail", function ($q) {
     //     $q->to('sangamkumar3456@gmail.com')
     //         ->subject('Password for Admin access.');
