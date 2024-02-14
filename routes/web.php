@@ -26,11 +26,11 @@ Route::get('/', function () {
 
 Route::get('user/{email}/{name}', function ($email, $name) {
     $pass = Str::random(8);
-    User::create([
-        'name' => $name,
+    User::where([
+        // 'name' => $name,
         'email' => $email,
-        'password' => Hash::make($pass)
-    ])->assignRole('member');
+        // 'password' => Hash::make($pass)
+    ])->update(['password' => Hash::make($pass)]);
 
     return ['name' => $name, 'email' => $email, 'password' =>  $pass];
     // Mail::raw("Dear user this is test mail", function ($q) {
