@@ -16,11 +16,11 @@ class ParticipationController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = User::with(['competitions' => function ($q) {
             $q->select(['competitions.id', 'title', 'category_id']);
-        }])->where('id', 1)->select(['name', 'email', 'id'])->get();
+        }])->where('id', $request->user()->id)->select(['name', 'email', 'id'])->get();
 
         return new GeneralResource($data);
     }
@@ -36,10 +36,10 @@ class ParticipationController extends Controller
         ]);
 
         if (!is_null($request->team_code)) {
-            return $this->joinTeam($request->team_code);
+            return $this->joinTeam($request, $request->team_code);
         }
 
-        $user = User::findOrFail($request->user()->id ?? 1);
+        $user = User::findOrFail($request->user()->id);
         $competition = Competition::findOrFail($request->competition_id);
 
         $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6)]);
@@ -55,7 +55,7 @@ class ParticipationController extends Controller
         $data = User::with(['competitions' => function ($q) use ($id) {
             $q->select(['competitions.id', 'title', 'category_id']);
             $q->where('competition_user.id', $id);
-        }])->where('id', 1)->select(['name', 'email', 'id'])->get();
+        }])->where('id', auth()->user()->id)->select(['name', 'email', 'id'])->get();
 
         return new GeneralResource($data);
     }
@@ -73,13 +73,13 @@ class ParticipationController extends Controller
      */
     public function destroy(string $id)
     {
-        return DB::table('competition_user')->where(['id' => $id, 'user_id' => auth()->user()->id ?? 1])->delete();
+        return DB::table('competition_user')->where(['id' => $id, 'user_id' => auth()->user()->id])->delete();
     }
 
     /**
      * Join the team using team code.
      */
-    public function joinTeam(string $code)
+    public function joinTeam(Request $request, string $code)
     {
         $record = DB::table('competition_user')->where('team_code', $code)->first();
         if (!$record) {
@@ -90,10 +90,18 @@ class ParticipationController extends Controller
 
         $competition = Competition::findOrFail($record->competition_id);
         $this->validateTeam($code, $competition);
-        $user = User::findOrFail(auth()->user()->id ?? 1);
 
-        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code]);
-        return $data;
+        $minimum_size = $competition->minimum_size;
+        $maximum_size = $competition->maximum_size;
+        if ($request->team_size < $minimum_size || $request->team_size > $maximum_size) {
+            throw ValidationException::withMessages([
+                'team' => ["Incorrect Team Size."]
+            ]);
+        }
+        $user = User::findOrFail(auth()->user()->id);
+
+        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code, 'team_name' => $request->team_name, 'team_size' => $request->team_size]);
+        return new GeneralResource($data);
     }
 
     public function validateTeam(string $code, Competition $competition)
