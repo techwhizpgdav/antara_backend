@@ -161,6 +161,7 @@ class CompetitionController extends Controller
     public function compByDay()
     {
         $data = Competition::select(DB::raw('DAYNAME(date) as day'), 'id', 'title', 'date')
+            ->orderByRaw('DAY(date)')
             ->get()
             ->groupBy('day');
 
