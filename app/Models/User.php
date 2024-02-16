@@ -63,7 +63,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function competitions(): BelongsToMany
     {
         return $this->belongsToMany(Competition::class)
-            ->withPivot(['team_code', 'created_at', 'allowed', 'id']);
+            ->withPivot(['team_code', 'created_at', 'allowed', 'id', 'team_size', 'team_name']);
     }
 
     /**
