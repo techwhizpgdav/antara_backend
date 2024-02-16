@@ -23,7 +23,7 @@ class UserController extends Controller
     }
     public function pendingCount(){
         $notVerifiedCount = DB::table('users')->where('is_verified', 0)->count();
-        $data = ['verified_count' => $notVerifiedCount];
+        $data = ['not_verified_count' => $notVerifiedCount];
         return new GeneralResource($data);
     }
     
