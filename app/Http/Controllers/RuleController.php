@@ -52,9 +52,13 @@ class RuleController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Rule $rule)
     {
-        //
+        $data = $rule->update([
+            'statement' => $request->statement ?? $rule->statement
+        ]);
+
+        return new GeneralResource($data);
     }
 
     /**
@@ -62,6 +66,7 @@ class RuleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $data = Rule::where('id', $id)->delete();
+        return $data;
     }
 }
