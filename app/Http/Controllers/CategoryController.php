@@ -44,27 +44,24 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Category $category)
     {
-        //
-        $record = Category::findOrFail($id);
-        return new CategoryResource($record);
+        return new CategoryResource($category);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $category)
     {
         //
         $request->validate([
             'name' => 'required|string|max:100|unique:categories,name,' . $id . ',id',
             'background_image' => 'required|url',
         ]);
-        $record = Category::findOrFail($id);
-        $update = $record->update($request->only(['name', 'background_image']));
+        $category->update($request->only(['name', 'background_image']));
 
-        return response()->json(['data' => $update]);
+        return new GeneralResource($category);
     }
 
     /**
