@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GeneralResource;
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends Controller
@@ -22,16 +23,13 @@ class UserController extends Controller
         return new GeneralResource($data);
     }
     public function pendingCount(){
-        $notVerifiedCount = DB::table('users')->where('is_verified', 0)->count();
-        $data = [
-            'not_verified_count' => $notVerifiedCount
-        ];
-        return new GeneralResource($data);
+        $unverified_user = DB::table('users')->where('is_verified', 0)->count();
+        return new GeneralResource($unverified_user);
     }
 
     public function notVerifiedUsers(){
-        $notVerifiedUsers = DB::table('users')->where('is_verified', false)->get();
-        return new GeneralResource($notVerifiedUsers);
+        $unverified_user = User::where('is_verified', false)->paginate(20);
+        return new GeneralResource($unverified_user);
     }
-    
+
 }

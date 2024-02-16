@@ -56,7 +56,7 @@ class CategoryController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required|string|max:100|unique:categories,name,' . $id . ',id',
+            'name' => 'required|string|max:100|unique:categories,name,' . $category->id . ',id',
             'background_image' => 'required|url',
         ]);
         $category->update($request->only(['name', 'background_image']));
