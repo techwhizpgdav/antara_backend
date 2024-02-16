@@ -20,7 +20,7 @@ class ParticipationController extends Controller
     {
         $data = User::with(['competitions' => function ($q) {
             $q->select(['competitions.id', 'title', 'category_id']);
-        }])->where('id', $request->user()->id ?? 45)->select(['name', 'email', 'id'])->get();
+        }])->where('id', $request->user()->id ?? 44)->select(['name', 'email', 'id'])->get();
 
         return new GeneralResource($data);
     }
