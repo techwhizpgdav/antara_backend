@@ -14,11 +14,17 @@ class UserController extends Controller
     public function getCounts(){
         $data=[
             'registration_count' => DB::table('users')->count(),
-            'societie_count' => DB::table('societies')->count(),
+            'society_count' => DB::table('societies')->count(),
             'competition_count' => DB::table('competitions')->count(),
             'participation_count' => DB::table('competition_user')->count(),
 
         ];
         return new GeneralResource($data);
     }
+    public function pendingCount(){
+        $notVerifiedCount = DB::table('users')->where('is_verified', 0)->count();
+        $data = ['verified_count' => $notVerifiedCount];
+        return new GeneralResource($data);
+    }
+    
 }
