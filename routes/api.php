@@ -53,5 +53,7 @@ Route::post('test', function () {
 Route::apiResource('sendpass', MailController::class);
 Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
 Route::get('admin/notverify', [AdminUserController::class, 'pendingCount']);
+Route::get('admin/notverify/list', [AdminUserController::class, 'notVerifiedUsers']);
+
 
 
