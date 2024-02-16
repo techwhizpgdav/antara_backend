@@ -13,6 +13,7 @@ use App\Http\Controllers\SocietyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
+use App\Http\Controllers\Admin\Hyperion\UserController as AdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,9 @@ Route::post('test', function () {
 })->middleware(['auth:api', 'verified']);
 
 Route::apiResource('sendpass', MailController::class);
+Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
+Route::get('admin/notverify', [AdminUserController::class, 'pendingCount']);
+Route::get('admin/notverify/list', [AdminUserController::class, 'notVerifiedUsers']);
+
+
+
