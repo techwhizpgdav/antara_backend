@@ -33,6 +33,7 @@ class ParticipationController extends Controller
         $request->validate([
             'competition_id' => 'required|exists:competitions,id',
             'team_code' => 'nullable|exists:competition_user,team_code',
+            'team' => 'required|boolean'
         ]);
 
         if (!is_null($request->team_code)) {
@@ -42,7 +43,7 @@ class ParticipationController extends Controller
         $user = User::findOrFail($request->user()->id);
         $competition = Competition::findOrFail($request->competition_id);
 
-        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6)]);
+        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6), 'team_name' => $request->team_name, 'team_size' => $request->team_size, 'team' => $request->team]);
 
         return new GeneralResource($data);
     }
