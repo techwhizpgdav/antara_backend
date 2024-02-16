@@ -88,7 +88,17 @@ class CompetitionController extends Controller
     public function show(string $id)
     {
         $record = Competition::with(['category', 'society', 'rounds.rules'])->findOrFail($id);
-        return new CompetitionResource($record);
+        if (auth()->check()) {
+            $check = DB::table('competition_user')->where(['user_id' => auth()->user()->id, 'competition_id' => $id])->exists();
+            if ($check) {
+                $participated = true;
+            } else {
+                $participated = false;
+            }
+        } else {
+            $participated = false;
+        }
+        return new CompetitionResource(['competition' => $record, 'participated' => $participated]);
     }
 
     /**
