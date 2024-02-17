@@ -19,6 +19,7 @@ return new class extends Migration
 
         Schema::table('competition_user', function (Blueprint $table) {
             $table->string('remarks')->nullable();
+            $table->string('payment_ss')->nullable();
             $table->string('sponsor_link')->nullable();
         });
     }
