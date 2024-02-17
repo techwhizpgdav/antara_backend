@@ -39,6 +39,9 @@ class ParticipationController extends Controller
             'screenshot' => 'nullable|mime:jpg,jpeg,png|size:2048'
         ]);
 
+        if (DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id])->exists()) {
+            return response()->json(['message' => 'You can participate only once.']);
+        }
 
         if (!is_null($request->team_code)) {
             return $this->joinTeam($request, $request->team_code);
@@ -116,7 +119,7 @@ class ParticipationController extends Controller
         }
         $user = User::findOrFail(auth()->user()->id);
 
-        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code, 'team_name' => $request->team_name, 'team_size' => $request->team_size]);
+        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code, 'team_name' => $record->team_name, 'team_size' => $record->team_size]);
         return new GeneralResource($data);
     }
 

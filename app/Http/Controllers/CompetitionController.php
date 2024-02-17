@@ -48,7 +48,10 @@ class CompetitionController extends Controller
             'team_fee' => 'required_if:paid_event,true',
             'individual_fee' => 'required_if:paid_event,true',
             'upi_id' => 'required_if:paid_event,true',
-            'tag_line' => 'nullable|string'
+            'tag_line' => 'nullable|string',
+            'sponsor_task' => 'nullable|boolean',
+            'remarks' => 'nullable|boolean',
+            'remarks_label' => 'nullable|string'
         ]);
 
         $society = SocietyUser::where('user_id', auth()->user()->id)->first();
@@ -75,7 +78,10 @@ class CompetitionController extends Controller
                 'team_fee' => $request->team_fee,
                 'individual_fee' => $request->individual_fee,
                 'upi_id' => $request->upi_id,
-                'paid_event' => $request->paid_event
+                'paid_event' => $request->paid_event,
+                'sponsor_task' => $request->sponsor_task,
+                'remarks' => $request->remarks,
+                'remarks_label' => $request->remarks_label,
             ]
         );
 
@@ -122,7 +128,9 @@ class CompetitionController extends Controller
             'team_fee' => 'required_if:paid_event,true',
             'individual_fee' => 'required_if:paid_event,true',
             'upi_id' => 'required_if:paid_event,true',
-            'tag_line' => 'nullable|string'
+            'sponsor_task' => 'nullable|boolean',
+            'remarks' => 'nullable|boolean',
+            'remarks_label' => 'nullable|string'
         ]);
 
         $update = $competition->update([
@@ -141,7 +149,10 @@ class CompetitionController extends Controller
             'team_fee' => $request->team_fee,
             'individual_fee' => $request->individual_fee,
             'upi_id' => $request->upi_id,
-            'paid_event' => $request->paid_event
+            'paid_event' => $request->paid_event,
+            'sponsor_task' => $request->sponsor_task,
+            'remarks' => $request->remarks,
+            'remarks_label' => $request->remarks_label,
         ]);
 
         return response()->json(['data' => $update]);
@@ -161,7 +172,7 @@ class CompetitionController extends Controller
     public function compByDay()
     {
         $data = Competition::select(DB::raw('DAYNAME(date) as day'), 'competitions.id', 'title', 'date', 'start_at', 'ends_at', 'name', 'venue', 'society_id')
-            ->join('societies', 'societies.id','=','competitions.society_id')
+            ->join('societies', 'societies.id', '=', 'competitions.society_id')
             ->orderByRaw('DAY(date)')
             ->get()
             ->groupBy('day');
