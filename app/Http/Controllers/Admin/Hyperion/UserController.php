@@ -36,12 +36,12 @@ class UserController extends Controller
         return new GeneralResource($unverified_user);
     }
 
-    public function recentPaticipate()
-    {
-        $recentParticipations = Competition::with(['user' => function ($query) {
-            $query->orderBy('competition_user.created_at', 'desc');
-        }])
-            ->orderBy('created_at', 'desc')
+    public function recentPaticipate(){
+        $recentParticipations = DB::table('competition_user')
+            ->join('users', 'competition_user.user_id', '=', 'users.id')
+            ->join('competitions', 'competition_user.competition_id', '=', 'competitions.id')
+            ->select('competition_user.*', 'users.name as user_name', 'competitions.title as competition_title')
+            ->orderBy('competition_user.created_at', 'desc')
             ->take(10)
             ->get();
 
