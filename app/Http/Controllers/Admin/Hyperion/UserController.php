@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Hyperion;
 
+use App\Models\User;
+use App\Models\Competition;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\GeneralResource;
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends Controller
@@ -29,5 +30,16 @@ class UserController extends Controller
     {
         $unverified_user = User::where('is_verified', false)->paginate(20);
         return new GeneralResource($unverified_user);
+    }
+
+    public function recentPaticipate(){
+        $recentParticipations = Competition::with(['user' => function ($query) {
+            $query->orderBy('competition_user.created_at', 'desc');
+        }])
+        ->orderBy('created_at', 'desc')
+        ->take(10)
+        ->get();
+
+        return new GeneralResource($recentParticipations);
     }
 }
