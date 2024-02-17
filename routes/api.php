@@ -41,6 +41,9 @@ Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
+Route::get('my-team', [ParticipationController::class, 'myTeam'])->middleware('auth:api');
+Route::get('my-team/{code}', [ParticipationController::class, 'teamDetails'])->middleware('auth:api');
+
 Route::get('users/{role}', [UserController::class, 'index']);
 Route::get('timeline', [CompetitionController::class, 'compByDay']);
 
