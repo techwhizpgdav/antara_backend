@@ -50,7 +50,7 @@ class CompetitionController extends Controller
             'upi_id' => 'required_if:paid_event,true',
             'tag_line' => 'nullable|string',
             'sponsor_task' => 'nullable|boolean',
-            'remarks' => 'nullable|boolean',
+            'remarks' => 'boolean',
             'remarks_label' => 'nullable|string'
         ]);
 
@@ -129,7 +129,7 @@ class CompetitionController extends Controller
             'individual_fee' => 'required_if:paid_event,true',
             'upi_id' => 'required_if:paid_event,true',
             'sponsor_task' => 'nullable|boolean',
-            'remarks' => 'nullable|boolean',
+            'remarks' => 'boolean',
             'remarks_label' => 'nullable|string'
         ]);
 
