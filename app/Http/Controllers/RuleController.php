@@ -54,11 +54,11 @@ class RuleController extends Controller
      */
     public function update(Request $request, Rule $rule)
     {
-        $data = $rule->update([
+        $rule->update([
             'statement' => $request->statement ?? $rule->statement
         ]);
 
-        return new GeneralResource($data);
+        return new GeneralResource($rule);
     }
 
     /**
