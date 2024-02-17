@@ -52,6 +52,8 @@ class ParticipationController extends Controller
 
         if ($request->hasFile('screenshot')) {
             $path = $request->file('screenshot')->store('payments');
+        } else {
+            $path = null;
         }
 
         $data = $competition->user()->attach(
@@ -59,7 +61,7 @@ class ParticipationController extends Controller
             [
                 'created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6), 'team_name' => $request->team_name,
                 'team_size' => $request->team_size, 'team' => $request->team, 'remarks' => $request->remarks, 'sponsor_link' => $request->sponsor_link,
-                'payment_ss' => $path ?: null,
+                'payment_ss' => $path
             ]
         );
 
