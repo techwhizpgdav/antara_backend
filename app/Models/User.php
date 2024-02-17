@@ -105,4 +105,14 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->belongsToMany(Society::class);
     }
+
+    /**
+     * The competitionSubmissions that belong to the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function competitionSubmissions(): BelongsToMany
+    {
+        return $this->belongsToMany(Competition::class, 'submissions');
+    }
 }

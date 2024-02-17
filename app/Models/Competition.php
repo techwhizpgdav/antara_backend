@@ -92,4 +92,14 @@ class Competition extends Model
     {
         return $this->hasManyThrough(Rule::class, Round::class)->with(['round.competition']);
     }
+
+    /**
+     * The userSubmissions that belong to the Competition
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function userSubmissions(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'submissions');
+    }
 }
