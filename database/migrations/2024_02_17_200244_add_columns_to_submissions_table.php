@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('submissions', function (Blueprint $table) {
             $table->foreignId('user_id')->nullable()->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->string('status')->default('pending');
+            $table->string('message')->nullable();
         });
     }
 

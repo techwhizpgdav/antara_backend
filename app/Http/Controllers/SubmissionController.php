@@ -14,7 +14,7 @@ class SubmissionController extends Controller
      */
     public function index(Request $request)
     {
-        return new GeneralResource(User::with(["submissions"])->where('id', $request->user()->id)->get());
+        return new GeneralResource(User::with(["competitionSubmissions"])->where('id', $request->user()->id)->get());
     }
 
     /**
@@ -31,7 +31,7 @@ class SubmissionController extends Controller
         $user = User::findOrFail($request->user()->id);
         $competition = Competition::findOrFail($request->competition_id);
 
-        $user->competitionSubmissions()->attach($competition, ['url' => $request->url, 'remarks' => $request->remarks]);
+        $user->competitionSubmissions()->attach($competition, ['url' => $request->url, 'remarks' => $request->remarks, 'created_at' => now(), 'updated_at' => now()]);
 
         return new GeneralResource($user);
     }

@@ -14,6 +14,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Admin\Hyperion\UserController as AdminUserController;
+use App\Http\Controllers\SubmissionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('participations', ParticipationController::class);
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
+Route::apiResource('submissions', SubmissionController::class);
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
 Route::get('my-team', [ParticipationController::class, 'myTeam'])->middleware('auth:api');
