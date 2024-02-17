@@ -53,8 +53,11 @@ Route::post('test', function () {
 Route::apiResource('sendpass', MailController::class);
 
 Route::group(['prefix' => 'admin'], function () {
-    Route::group(['prefix' => 'hyprion'], function () {
+    Route::group(['prefix' => 'hyperion'], function () {
         // Hyperion routes
+        Route::get('stats',[AdminUserController::class,'getCounts']);
+        Route::get('unverify/list',[AdminUserController::class,'notVerifiedUsers']);
+        Route::get('recparticipate',[AdminUserController::class,'recentPaticipate']);
     });
 
     // Society Routes
