@@ -39,5 +39,7 @@ Route::get('user/{email}/{name}', function ($email, $name) {
     // });
 });
 
+Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);
+
 
 require __DIR__ . '/auth.php';

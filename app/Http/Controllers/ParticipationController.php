@@ -117,4 +117,45 @@ class ParticipationController extends Controller
             ]);
         }
     }
+
+    public function myTeam(Request $request)
+    {
+        $participation = DB::table('competition_user')
+            ->where(['user_id' => $request->user()->id ?? 44, 'team' => 1])
+            ->join('competitions', 'competitions.id', '=', 'competition_user.competition_id')
+            ->select('competition_user.*', 'competitions.title')
+            ->get();
+        if (!$participation) {
+            throw ValidationException::withMessages([
+                'team' => "No team exist for this user. Please create a team or join an existing one.",
+            ]);
+        }
+
+        // $team = DB::table('competition_user')
+        //     ->where('team_code', $participation->team_code)
+        //     ->join('users', 'users.id', '=', 'competition_user.user_id')
+        //     ->select('competition_user.*', 'users.name')
+        //     ->get();
+
+        return $participation;
+        // ->select('team_code', 'competiton_id', 'user_id', )
+    }
+
+    public function teamDetails(Request $request, string $code)
+    {
+        $authorization = DB::table('competition_user')->where(['team_code' => $code, 'user_id' => $request->user()->id ?? 44])->first();
+        if (!$authorization) {
+            return response()->json(['message' => 'Team does not exist'], 403);
+        }
+        
+        $team = Competition::with([
+            'user' => function ($q) use ($code) {
+                $q->wherePivot('team_code', $code)->withPivot('allowed');
+            }
+        ])
+        ->where('id', $authorization->competition_id)
+        ->get();
+
+        return $team;
+    }
 }
