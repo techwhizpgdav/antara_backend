@@ -26,7 +26,7 @@ class UserController extends Controller
         return new GeneralResource($data);
     }
 
-    public function notVerifiedUsers()
+    public function unverifiedUsers()
     {
         $unverified_user = User::where('is_verified', false)->paginate(20);
         return new GeneralResource($unverified_user);

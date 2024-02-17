@@ -97,6 +97,16 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     }
 
     /**
+     * Get all of the societyCompetitions for the User
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function competitionParticipations(): HasManyThrough
+    {
+        return $this->hasManyThrough(Competition::class, SocietyUser::class, 'user_id', 'society_id', 'id', 'society_id');
+    }
+
+    /**
      * The societies that belong to the User
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

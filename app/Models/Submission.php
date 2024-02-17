@@ -9,4 +9,5 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class Submission extends Pivot
 {
     use HasFactory;
+    protected $table = 'submissions';
 }

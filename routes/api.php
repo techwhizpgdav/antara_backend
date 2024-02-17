@@ -14,6 +14,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Admin\Hyperion\UserController as AdminUserController;
+use App\Http\Controllers\Admin\Society\UserController as SocietyUserController;
 use App\Http\Controllers\SubmissionController;
 
 /*
@@ -60,11 +61,11 @@ Route::apiResource('sendpass', MailController::class);
 Route::group(['prefix' => 'admin'], function () {
     Route::group(['prefix' => 'hyperion'], function () {
         // Hyperion routes
-        Route::get('stats',[AdminUserController::class,'getCounts']);
-        Route::get('unverify/list',[AdminUserController::class,'notVerifiedUsers']);
+        Route::get('counts',[AdminUserController::class,'getCounts']);
+        Route::get('unverified-users',[AdminUserController::class,'unverifiedUsers']);
         Route::get('recparticipate',[AdminUserController::class,'recentPaticipate']);
     });
-
+    Route::get('participations', [SocietyUserController::class, 'participations']);
     // Society Routes
 });
 // Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
