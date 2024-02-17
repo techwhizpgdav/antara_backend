@@ -141,7 +141,7 @@ class ParticipationController extends Controller
         $participation = DB::table('competition_user')
             ->where(['user_id' => $request->user()->id ?? 44, 'team' => 1])
             ->join('competitions', 'competitions.id', '=', 'competition_user.competition_id')
-            ->select('competition_user.*', 'competitions.title')
+            ->select('competition_user.*', 'competitions.title', 'competitions.paid_event')
             ->get();
         if (!$participation) {
             throw ValidationException::withMessages([
