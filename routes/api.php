@@ -51,9 +51,14 @@ Route::post('test', function () {
 })->middleware(['auth:api', 'verified']);
 
 Route::apiResource('sendpass', MailController::class);
-Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
-Route::get('admin/notverify', [AdminUserController::class, 'pendingCount']);
-Route::get('admin/notverify/list', [AdminUserController::class, 'notVerifiedUsers']);
 
+Route::group(['prefix' => 'admin'], function () {
+    Route::group(['prefix' => 'hyprion'], function () {
+        // Hyperion routes
+    });
 
-
+    // Society Routes
+});
+// Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
+// Route::get('admin/notverify', [AdminUserController::class, 'pendingCount']);
+// Route::get('admin/notverify/list', [AdminUserController::class, 'notVerifiedUsers']);

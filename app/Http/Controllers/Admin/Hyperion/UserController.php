@@ -12,24 +12,22 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class UserController extends Controller
 {
     //
-    public function getCounts(){
-        $data=[
+    public function getCounts()
+    {
+        $data = [
             'registration_count' => DB::table('users')->count(),
             'society_count' => DB::table('societies')->count(),
             'competition_count' => DB::table('competitions')->count(),
             'participation_count' => DB::table('competition_user')->count(),
+            'unverified_users' => DB::table('users')->where('is_verified', 0)->count()
 
         ];
         return new GeneralResource($data);
     }
-    public function pendingCount(){
-        $unverified_user = DB::table('users')->where('is_verified', 0)->count();
-        return new GeneralResource($unverified_user);
-    }
 
-    public function notVerifiedUsers(){
+    public function notVerifiedUsers()
+    {
         $unverified_user = User::where('is_verified', false)->paginate(20);
         return new GeneralResource($unverified_user);
     }
-
 }
