@@ -131,14 +131,7 @@ class ParticipationController extends Controller
             ]);
         }
 
-        // $team = DB::table('competition_user')
-        //     ->where('team_code', $participation->team_code)
-        //     ->join('users', 'users.id', '=', 'competition_user.user_id')
-        //     ->select('competition_user.*', 'users.name')
-        //     ->get();
-
-        return $participation;
-        // ->select('team_code', 'competiton_id', 'user_id', )
+        return new GeneralResource($participation);
     }
 
     public function teamDetails(Request $request, string $code)
@@ -147,7 +140,7 @@ class ParticipationController extends Controller
         if (!$authorization) {
             return response()->json(['message' => 'Team does not exist'], 403);
         }
-        
+
         $team = Competition::with([
             'user' => function ($q) use ($code) {
                 $q->wherePivot('team_code', $code)->withPivot('allowed');
@@ -156,6 +149,6 @@ class ParticipationController extends Controller
         ->where('id', $authorization->competition_id)
         ->get();
 
-        return $team;
+        return new GeneralResource($team);
     }
 }
