@@ -35,7 +35,10 @@ class Competition extends Model
         'description',
         'paid_event',
         'minimum_size',
-        'maximum_size'
+        'maximum_size',
+        'remarks',
+        'sponsor_task',
+        'remarks_label'
     ];
 
     /**

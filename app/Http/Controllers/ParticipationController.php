@@ -43,7 +43,13 @@ class ParticipationController extends Controller
         $user = User::findOrFail($request->user()->id);
         $competition = Competition::findOrFail($request->competition_id);
 
-        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6), 'team_name' => $request->team_name, 'team_size' => $request->team_size, 'team' => $request->team]);
+        $data = $competition->user()->attach(
+            $user,
+            [
+                'created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6), 'team_name' => $request->team_name,
+                'team_size' => $request->team_size, 'team' => $request->team, 'remarks' => $request->remarks, 'sponsor_link' => $request->sponsor_link
+            ]
+        );
 
         return new GeneralResource($data);
     }
@@ -146,8 +152,8 @@ class ParticipationController extends Controller
                 $q->wherePivot('team_code', $code)->withPivot('allowed');
             }
         ])
-        ->where('id', $authorization->competition_id)
-        ->get();
+            ->where('id', $authorization->competition_id)
+            ->get();
 
         return new GeneralResource($team);
     }
