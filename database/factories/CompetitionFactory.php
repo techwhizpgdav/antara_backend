@@ -30,6 +30,13 @@ class CompetitionFactory extends Factory
             'date'=>$this->faker->date(),
             'start_at'=> $this->faker->time(),
             'ends_at'=> $this->faker->time(),
+            'upi_id'=>$this->faker->phoneNumber(10),
+            'tag_line'=> $this->faker->sentence(),
+            // 'team_fee'=>$this->faker->numberBetween(50,100),
+            'individual_fee'=>$this->faker->numberBetween(50,100),
+            'description'=>$this->faker->sentence(),
+            'paid_event'=>$this->faker->numberBetween(0,1),
+            
 
             
         ];
