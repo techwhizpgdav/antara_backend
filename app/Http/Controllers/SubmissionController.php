@@ -6,6 +6,7 @@ use App\Http\Resources\GeneralResource;
 use App\Models\Competition;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SubmissionController extends Controller
 {
@@ -30,6 +31,8 @@ class SubmissionController extends Controller
 
         $user = User::findOrFail($request->user()->id);
         $competition = Competition::findOrFail($request->competition_id);
+
+        $participation = DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition])
 
         $user->competitionSubmissions()->attach($competition, ['url' => $request->url, 'remarks' => $request->remarks, 'created_at' => now(), 'updated_at' => now()]);
 
