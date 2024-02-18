@@ -142,7 +142,7 @@ class ParticipationController extends Controller
     public function myTeam(Request $request)
     {
         $participation = DB::table('competition_user')
-            ->where(['user_id' => $request->user()->id ?? 44, 'team' => 1])
+            ->where(['user_id' => $request->user()->id, 'team' => 1])
             ->join('competitions', 'competitions.id', '=', 'competition_user.competition_id')
             ->select('competition_user.*', 'competitions.title', 'competitions.paid_event')
             ->get();
@@ -157,7 +157,7 @@ class ParticipationController extends Controller
 
     public function teamDetails(Request $request, string $code)
     {
-        $authorization = DB::table('competition_user')->where(['team_code' => $code, 'user_id' => $request->user()->id ?? 44])->first();
+        $authorization = DB::table('competition_user')->where(['team_code' => $code, 'user_id' => $request->user()->id])->first();
         if (!$authorization) {
             return response()->json(['message' => 'Team does not exist'], 403);
         }
