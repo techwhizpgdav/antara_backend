@@ -62,7 +62,7 @@ class ParticipationController extends Controller
             [
                 'created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6), 'team_name' => $request->team_name,
                 'team_size' => $request->team_size, 'team' => $request->team, 'remarks' => $request->remarks, 'sponsor_link' => $request->sponsor_link,
-                'payment_ss' => $path
+                'payment_ss' => $path, 'leader' => 1
             ]
         );
 

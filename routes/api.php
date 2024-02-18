@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin'], function () {
     });
     Route::get('participations', [SocietyUserController::class, 'participations']);
     Route::get('submissions', [SocietyUserController::class, 'submissions']);
+    Route::put('submissions/{id}', [SocietyUserController::class, 'editSubmissions']);
     // Society Routes
 });
 // Route::get('admin/stats', [AdminUserController::class, 'getCounts']);

@@ -10,4 +10,6 @@ class Submission extends Pivot
 {
     use HasFactory;
     protected $table = 'submissions';
+
+    protected $fillable = ['status'];
 }

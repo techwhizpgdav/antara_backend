@@ -27,12 +27,24 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'college_id' => ['required', 'image'],
+            'screenshot' => ['required', 'image'],
+            'phone' => ['required', 'digits:10'],
+            'college' => ['required', 'string'],
         ]);
+
+        $identity = $request->file( 'college_id' )->store( 'identity');
+        $sponsor_task = $request->file( 'screenshot' )->store( 'sponsor_task');
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'phone_number' => $request->phone,
+            'college' => $request->college,
+            'identity' => $identity,
+            'sponsor_task' => $sponsor_task
         ]);
         // ->assignRole('user');
 
