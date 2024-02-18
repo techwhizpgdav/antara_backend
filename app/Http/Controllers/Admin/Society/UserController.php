@@ -14,9 +14,12 @@ class UserController extends Controller
     {
 
         $user = User::find(34)->societies;
-        $adminCompetitions = Competition::with('user')->whereIn('society_id', $user->pluck('id'))->get();
+        $adminCompetitions = Competition::with(['user' => function ($q) {
+            $q->select(['name', 'email']);
+        }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get()
+            ->groupBy('title');
 
-        dd($adminCompetitions);
+        return $adminCompetitions;
     }
 
     public function teams()
