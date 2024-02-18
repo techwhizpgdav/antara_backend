@@ -15,14 +15,24 @@ class UserController extends Controller
 
         $user = User::find(34)->societies;
         $adminCompetitions = Competition::with(['user' => function ($q) {
-            $q->select(['name', 'email']);
-        }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get()
-            ->groupBy('title');
+            $q->select(['name', 'email'])->withPivot(['team', 'team_size', 'remarks', 'team_code', 'allowed']);
+        }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get();
+        // ->groupBy('title');
 
-        return $adminCompetitions;
+        return new GeneralResource($adminCompetitions);
     }
 
     public function teams()
     {
+    }
+
+    public function submissions()
+    {
+        $user = User::find(34)->societies;
+        $adminCompetitions = Competition::with(['userSubmissions' => function ($q) {
+            $q->select(['name', 'email'])->withPivot(['url']);
+        }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get();
+
+        return new GeneralResource($adminCompetitions);
     }
 }

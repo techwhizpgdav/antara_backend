@@ -50,12 +50,6 @@ Route::get('my-team/{code}', [ParticipationController::class, 'teamDetails'])->m
 Route::get('users/{role}', [UserController::class, 'index']);
 Route::get('timeline', [CompetitionController::class, 'compByDay']);
 
-
-
-Route::post('test', function () {
-    return ['King of Pirates' => "Luffy"];
-})->middleware(['auth:api', 'verified']);
-
 Route::apiResource('sendpass', MailController::class);
 
 Route::group(['prefix' => 'admin'], function () {
@@ -66,6 +60,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('recparticipate',[AdminUserController::class,'recentPaticipate']);
     });
     Route::get('participations', [SocietyUserController::class, 'participations']);
+    Route::get('submissions', [SocietyUserController::class, 'submissions']);
     // Society Routes
 });
 // Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
