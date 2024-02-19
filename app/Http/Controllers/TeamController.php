@@ -36,7 +36,7 @@ class TeamController extends Controller
         ]);
 
         $data = Team::create($request->only(['name','photo','position','mobile','role','linked_in','github','instagram']));
-        
+
         return new GeneralResource($data);
     }
 
@@ -84,5 +84,11 @@ class TeamController extends Controller
         $record = Team::findOrFail($id);
         $delete = $record->delete();
         return response()->json(['data' => $delete], 200);
+    }
+
+    public function getTeamByRole($role)
+    {
+        $teams = Team::where('role', $role)->get();
+        return new GeneralResource($teams);
     }
 }

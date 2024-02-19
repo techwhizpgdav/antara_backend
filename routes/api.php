@@ -47,7 +47,7 @@ Route::get('category-competitions/{id}', [CategoryController::class, 'competitio
 Route::get('my-team', [ParticipationController::class, 'myTeam'])->middleware('auth:api');
 Route::get('my-team/{code}', [ParticipationController::class, 'teamDetails'])->middleware('auth:api');
 
-Route::get('users/{role}', [UserController::class, 'index']);
+Route::get('teams/{role}', [UserController::class, 'getTeamByRole']);
 Route::get('timeline', [CompetitionController::class, 'compByDay']);
 
 Route::apiResource('sendpass', MailController::class);
