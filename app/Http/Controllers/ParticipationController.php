@@ -35,7 +35,7 @@ class ParticipationController extends Controller
             'competition_id' => 'required|exists:competitions,id',
             'team_code' => 'nullable|exists:competition_user,team_code',
             'team' => 'required|boolean',
-            'team_size' => 'required|boolean',
+            'team_size' => 'required|integer|min:1',
             'sponsor_link' => 'nullable|url:https',
             'screenshot' => 'nullable|mime:jpg,jpeg,png|size:2048'
         ]);
