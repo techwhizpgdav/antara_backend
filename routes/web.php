@@ -30,7 +30,7 @@ Route::get('user/{email}/{name}', function ($email, $name) {
         'name' => $name,
         'email' => $email,
         'password' => Hash::make($pass)
-    ]);
+    ])->assignRole('hyperion');
     // ->update(['password' => Hash::make($pass)]);
 
     // return ['name' => $name, 'email' => $email, 'password' =>  $pass];
