@@ -25,21 +25,18 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-Route::get('user/{email}/{name}', function ($email, $name) {
-    $pass = Str::random(8);
-    User::create([
-        'name' => $name,
-        'email' => $email,
-        'password' => Hash::make($pass)
-    ])->assignRole('member');
-    // ->update(['password' => Hash::make($pass)]);
+// Route::get('user/{email}', function ($email) {
+//     User::where([
+//         'email' => $email
+//     ])->update(['password' => Hash::make('@40Kmph00')]);
+//     // ->update(['password' => Hash::make($pass)]);
 
-    return ['name' => $name, 'email' => $email, 'password' =>  $pass];
-    // $mail = Mail::to($email)
-    // ->send(new Password($pass));
+//     return ['email' => $email];
+//     // $mail = Mail::to($email)
+//     // ->send(new Password($pass));
 
-    // dd($mail);
-});
+//     // dd($mail);
+// });
 
 Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);
 

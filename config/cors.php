@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000'), 'https://aarohna.netlify.app', 'https://aarohna.netlify.app/', 'http://localhost:5173', 'http://localhost:5173/', 'https://techwhizpgdav.github.io', 'https://techwhizpgdav.github.io/', 'https://admin-frontend-five-psi.vercel.app'],
+    'allowed_origins' => [env('FRONTEND_URL', 'http://localhost:3000'), 'http://localhost:5173', 'http://localhost:5173/', 'https://techwhizpgdav.github.io',  'https://admin-frontend-five-psi.vercel.app', 'https://arohana.pgdavhyperion.in'],
 
     'allowed_origins_patterns' => [],
 
