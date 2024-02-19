@@ -127,7 +127,7 @@ class ParticipationController extends Controller
         $minimum_size = $competition->minimum_size;
         $maximum_size = $competition->maximum_size;
 
-        if ($count > $maximum_size) {
+        if ($count >= $maximum_size) {
             throw ValidationException::withMessages([
                 'team' => "The team must contain minimum {$minimum_size} and maximum of {$maximum_size} members.",
             ]);
