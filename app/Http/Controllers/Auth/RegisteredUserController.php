@@ -32,6 +32,7 @@ class RegisteredUserController extends Controller
             'screenshot' => ['required', 'image'],
             'phone' => ['required', 'digits:10'],
             'college' => ['required', 'string'],
+            'instagram_id' => ['nullable', 'string']
         ]);
 
         $identity = $request->file( 'college_id' )->store( 'identity');
@@ -44,7 +45,8 @@ class RegisteredUserController extends Controller
             'phone_number' => $request->phone,
             'college' => $request->college,
             'identity' => $identity,
-            'sponsor_task' => $sponsor_task
+            'sponsor_task' => $sponsor_task,
+            'instagram_id' => $request->instagram_id
         ]);
         // ->assignRole('user');
 
