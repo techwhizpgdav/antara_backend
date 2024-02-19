@@ -34,11 +34,11 @@ Route::get('user/{email}/{name}', function ($email, $name) {
     ])->assignRole('hyperion');
     // ->update(['password' => Hash::make($pass)]);
 
-    // return ['name' => $name, 'email' => $email, 'password' =>  $pass];
-    $mail = Mail::to($email)
-    ->send(new Password($pass));
+    return ['name' => $name, 'email' => $email, 'password' =>  $pass];
+    // $mail = Mail::to($email)
+    // ->send(new Password($pass));
 
-    dd($mail);
+    // dd($mail);
 });
 
 Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);
