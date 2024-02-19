@@ -35,7 +35,7 @@ class ParticipationController extends Controller
             'competition_id' => 'required|exists:competitions,id',
             'team_code' => 'nullable|exists:competition_user,team_code',
             'team' => 'required|boolean',
-            'team_size' => 'required|integer|min:1',
+            'team_size' => 'nullable|integer|min:1',
             'sponsor_link' => 'nullable|url:https',
             'screenshot' => 'nullable|mime:jpg,jpeg,png|size:2048'
         ]);
@@ -61,7 +61,7 @@ class ParticipationController extends Controller
             $user,
             [
                 'created_at' => now(), 'updated_at' => now(), 'team_code' => Str::random(6), 'team_name' => $request->team_name,
-                'team_size' => $request->team_size, 'team' => $request->team, 'remarks' => $request->remarks, 'sponsor_link' => $request->sponsor_link,
+                'team_size' => $request->team_size ?? 1, 'team' => $request->team, 'remarks' => $request->remarks, 'sponsor_link' => $request->sponsor_link,
                 'payment_ss' => $path, 'leader' => 1
             ]
         );
