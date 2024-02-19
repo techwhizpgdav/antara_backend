@@ -115,7 +115,7 @@ class ParticipationController extends Controller
 
         $user = User::findOrFail(auth()->user()->id);
 
-        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code, 'team_name' => $record->team_name, 'team_size' => $record->team_size]);
+        $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code, 'team_name' => $record->team_name, 'team_size' => $record->team_size, 'team' => $record->team]);
         return new GeneralResource($data);
     }
 
