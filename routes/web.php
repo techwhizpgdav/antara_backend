@@ -33,11 +33,11 @@ Route::get('user/{email}/{name}', function ($email, $name) {
     ]);
     // ->update(['password' => Hash::make($pass)]);
 
-    return ['name' => $name, 'email' => $email, 'password' =>  $pass];
-    // Mail::raw("Dear user this is test mail", function ($q) {
-    //     $q->to('sangamkumar3456@gmail.com')
-    //         ->subject('Password for Admin access.');
-    // });
+    // return ['name' => $name, 'email' => $email, 'password' =>  $pass];
+    Mail::raw("Dear user this is your password for admin access $pass", function ($q) use ($email) {
+        $q->to($email)
+            ->subject('Password for Admin access.');
+    });
 });
 
 Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);
