@@ -57,6 +57,8 @@ class ParticipationController extends Controller
             $path = null;
         }
 
+        $team_code = Str::random(6);
+
         $data = $competition->user()->attach(
             $user,
             [
@@ -66,7 +68,7 @@ class ParticipationController extends Controller
             ]
         );
 
-        return new GeneralResource($data);
+        return new GeneralResource(['team' => $request->team, 'team_code' => $team_code]);
     }
 
     /**
@@ -116,7 +118,7 @@ class ParticipationController extends Controller
         $user = User::findOrFail(auth()->user()->id);
 
         $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code, 'team_name' => $record->team_name, 'team_size' => $record->team_size, 'team' => $record->team]);
-        return new GeneralResource($data);
+        return new GeneralResource(['team' => $record->team, 'team_code' => $code]);
     }
 
     public function validateTeam(string $code, Competition $competition)
