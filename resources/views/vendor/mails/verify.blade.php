@@ -212,7 +212,7 @@
                               <p><img src="https://cdn.discordapp.com/email_assets/127c95bbea39cd4bc1ad87d1500ae27d.png" alt="Party Wumpus" title="None" width="500" style="height: auto;"></p>
 
                               <h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">Hey SmilesDavis,</h2>
-                              <p>Wowwee! Thanks for registering an account with Discord! You're the coolest person in all the land (and I've met a lot of really cool people).</p>
+                              <p>Wowwee! Thanks for registering an account with Hyperion! You're the coolest person in all the land (and I've met a lot of really cool people).</p>
                               <p>Before we get started, we'll need to verify your email.</p>
 
                             </div>
@@ -223,8 +223,8 @@
                             <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
                               <tbody>
                                 <tr>
-                                  <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#7289DA"><a href={{$verificationLink}} style="text-decoration:none;line-height:100%;background:#7289DA;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;" target="_blank">
-                                      Verify Email
+                                  <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#7289DA"><a href="https://admin-frontend-five-psi.vercel.app/auth/login" style="text-decoration:none;line-height:100%;background:#7289DA;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;" target="_blank">
+                                     {{ $password }}
                                     </a></td>
                                 </tr>
                               </tbody>
@@ -342,14 +342,14 @@
                       <tr>
                         <td style="word-break:break-word;font-size:0px;padding:0px;" align="center">
                           <div style="cursor:auto;color:#99AAB5;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:12px;line-height:24px;text-align:center;">
-                            Sent by Discord • <a href="https://blog.discordapp.com/" style="color:#1EB0F4;text-decoration:none;" target="_blank">check our blog</a> • <a href="https://twitter.com/discordapp" style="color:#1EB0F4;text-decoration:none;" target="_blank">@discordapp</a>
+                            Sent by Hyperion
                           </div>
                         </td>
                       </tr>
                       <tr>
                         <td style="word-break:break-word;font-size:0px;padding:0px;" align="center">
                           <div style="cursor:auto;color:#99AAB5;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:12px;line-height:24px;text-align:center;">
-                            444 De Haro Street, Suite 200, San Francisco, CA 94107
+                            P.G.D.A.V. College, UoD
                           </div>
                         </td>
                       </tr>
