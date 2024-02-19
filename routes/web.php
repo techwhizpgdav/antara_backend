@@ -35,8 +35,8 @@ Route::get('user/{email}/{name}', function ($email, $name) {
 
     // return ['name' => $name, 'email' => $email, 'password' =>  $pass];
     $mail = Mail::raw("Dear user this is your password for admin access $pass", function ($q) use ($email) {
-        $q->to($email)
-            ->subject('Password for Admin access.');
+        $q->to($email);
+        $q->subject('Password for Admin access.');
     });
 
     dd($mail);
