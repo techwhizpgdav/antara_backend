@@ -50,4 +50,21 @@ class UserController extends Controller
 
         return $data;
     }
+
+    public function teamDetails(string $code)
+    {
+        $authorization = DB::table('competition_user')->where(['team_code' => $code])->first();
+
+        if (!$authorization) {
+            return response()->json(['message' => 'Team does not exist'], 403);
+        }
+
+        $team = Competition::with([
+            'user' => function ($q) use ($code) {
+                $q->select('name', 'email')->wherePivot('team_code', $code)->withPivot(['allowed', 'team_size', 'remarks', 'payment_ss', 'leader', 'team_name', 'sponsor_link', 'created_at', 'team_code', 'leader']);
+            }
+        ])->where('id', $authorization->competition_id)->select('id', 'title', 'image_url')->get();
+
+        return new GeneralResource($team);
+    }
 }
