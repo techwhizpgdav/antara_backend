@@ -113,13 +113,6 @@ class ParticipationController extends Controller
         $competition = Competition::findOrFail($record->competition_id);
         $this->validateTeam($code, $competition);
 
-        $minimum_size = $competition->minimum_size;
-        $maximum_size = $competition->maximum_size;
-        if ($request->team_size < $minimum_size || $request->team_size > $maximum_size) {
-            throw ValidationException::withMessages([
-                'team' => ["Incorrect Team Size."]
-            ]);
-        }
         $user = User::findOrFail(auth()->user()->id);
 
         $data = $competition->user()->attach($user, ['created_at' => now(), 'updated_at' => now(), 'team_code' => $code, 'team_name' => $record->team_name, 'team_size' => $record->team_size]);
@@ -132,7 +125,7 @@ class ParticipationController extends Controller
         $minimum_size = $competition->minimum_size;
         $maximum_size = $competition->maximum_size;
 
-        if ($count < $minimum_size || $count > $maximum_size) {
+        if ($count > $maximum_size) {
             throw ValidationException::withMessages([
                 'team' => "The team must contain minimum {$minimum_size} and maximum of {$maximum_size} members.",
             ]);
