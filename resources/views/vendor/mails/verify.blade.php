@@ -174,7 +174,7 @@
                   <!--[if mso | IE]>
         <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:undefined;width:640px;">
         <![endif]-->
-                  <div style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">Welcome to Discord!</div>
+                  <div style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">Welcome to Hyperion!</div>
                   <!--[if mso | IE]>
         </td></tr></table>
         <![endif]-->
@@ -209,9 +209,9 @@
                         <tr>
                           <td style="word-break:break-word;font-size:0px;padding:0px 0px 20px;" align="left">
                             <div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:24px;text-align:left;">
-                              <p><img src="https://cdn.discordapp.com/email_assets/127c95bbea39cd4bc1ad87d1500ae27d.png" alt="Party Wumpus" title="None" width="500" style="height: auto;"></p>
+                              <p><img src="https://arohana.b-cdn.net/mainposter.png" alt="Party Wumpus" title="None" width="500" style="height: auto;"></p>
 
-                              <h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">Hey SmilesDavis,</h2>
+                              <h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">Hey User,</h2>
                               <p>Wowwee! Thanks for registering an account with Hyperion! You're the coolest person in all the land (and I've met a lot of really cool people).</p>
                               <p>Before we get started, we'll need to verify your email.</p>
 
@@ -223,8 +223,8 @@
                             <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
                               <tbody>
                                 <tr>
-                                  <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#7289DA"><a href="https://admin-frontend-five-psi.vercel.app/auth/login" style="text-decoration:none;line-height:100%;background:#7289DA;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;" target="_blank">
-                                     {{ $verificationLink }}
+                                  <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#7289DA"><a href={{$verificationLink}} style="text-decoration:none;line-height:100%;background:#7289DA;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;" target="_blank">
+                                     Verify Email
                                     </a></td>
                                 </tr>
                               </tbody>
