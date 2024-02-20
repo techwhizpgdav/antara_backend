@@ -134,9 +134,9 @@
                         <td style="word-break:break-word;font-size:0px;padding:0px;" align="center">
                           <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0">
                             <tbody>
-                              <tr>
-                                <td style="width:138px;"><a href="https://discordapp.com/" target="_blank"><img alt="" title="" height="38px" src="https://cdn.discordapp.com/email_assets/2ec94ed90b8e95d764f2a1c96f33139e.png" style="border:none;border-radius:;display:block;outline:none;text-decoration:none;width:100%;height:38px;" width="138"></a></td>
-                              </tr>
+                              {{-- <tr> --}}
+                                {{-- <td style="width:138px;"><a href="https://discordapp.com/" target="_blank"><img alt="" title="" height="38px" src="https://cdn.discordapp.com/email_assets/2ec94ed90b8e95d764f2a1c96f33139e.png" style="border:none;border-radius:;display:block;outline:none;text-decoration:none;width:100%;height:38px;" width="138"></a></td> --}}
+                              {{-- </tr> --}}
                             </tbody>
                           </table>
                         </td>
@@ -305,7 +305,7 @@
                       <tr>
                         <td style="word-break:break-word;font-size:0px;padding:14px 70px 30px 70px;" align="center">
                           <div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:22px;text-align:center;">
-                            In Hearthstone, using the Hunter card Animal Companion against Kel'Thuzad will summon his cat Mr. Bigglesworth rather than the usual beasts.
+                            The popular game ‘Snakes and Ladders’ is India’s contribution to the world.
                           </div>
                         </td>
                       </tr>
