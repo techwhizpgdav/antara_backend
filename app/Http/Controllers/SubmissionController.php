@@ -16,7 +16,7 @@ class SubmissionController extends Controller
     public function index(Request $request)
     {
         return new GeneralResource(User::with(["competitionSubmissions" => function ($q) {
-            $q->withPivot(['message', 'status', 'remarks', 'created_at']);
+            $q->withPivot(['message', 'status', 'remarks', 'created_at', 'url']);
         }])->where('id', $request->user()->id)->get());
     }
 
