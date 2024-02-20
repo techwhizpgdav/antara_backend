@@ -27,7 +27,8 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-Route::get('user/{email}', function ($email) {
+Route::get('user', function () {
+    Cache::put('status', 'down');
     //     User::where([
     //         'email' => $email
     //     ])->update(['password' => Hash::make('luffy')]);
