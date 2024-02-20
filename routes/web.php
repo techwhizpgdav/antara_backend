@@ -25,18 +25,21 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-// Route::get('user/{email}', function ($email) {
+Route::get('user/{email}', function ($email) {
 //     User::where([
 //         'email' => $email
 //     ])->update(['password' => Hash::make('@40Kmph00')]);
 //     // ->update(['password' => Hash::make($pass)]);
 
 //     return ['email' => $email];
-//     // $mail = Mail::to($email)
-//     // ->send(new Password($pass));
+
+Mail::raw('This is test mail', function($q){
+    $q->to('rk3141508@gmail.com')
+    ->subject('Testing Purpose');
+});
 
 //     // dd($mail);
-// });
+});
 
 Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);
 
