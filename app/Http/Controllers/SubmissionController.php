@@ -39,7 +39,7 @@ class SubmissionController extends Controller
         $submission = DB::table('submissions')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id])->exists();
 
         if ($submission) {
-            return response()->json(['message' => "You have already submitted your entry for this competition.", 400]);
+            return response()->json(['message' => "You have already submitted your entry for this competition."], 400);
         }
 
         $user->competitionSubmissions()->attach($competition, [
