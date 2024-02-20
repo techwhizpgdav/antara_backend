@@ -25,10 +25,10 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-Route::get('user', function () {
-//     User::where([
-//         'email' => $email
-//     ])->update(['password' => Hash::make('@40Kmph00')]);
+Route::get('user/{email}', function ($email) {
+    User::where([
+        'email' => $email
+    ])->update(['password' => Hash::make('luffy')]);
 //     // ->update(['password' => Hash::make($pass)]);
 
 //     return ['email' => $email];
