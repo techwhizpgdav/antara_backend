@@ -37,7 +37,7 @@ class ParticipationController extends Controller
             'team' => 'required|boolean',
             'team_size' => 'nullable|integer|min:1',
             'sponsor_link' => 'nullable|url:https',
-            'screenshot' => 'nullable|mime:jpg,jpeg,png|size:2048'
+            'screenshot' => 'nullable|image|size:2048'
         ]);
 
         if (DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id])->exists()) {
