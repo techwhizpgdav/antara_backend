@@ -173,9 +173,18 @@ class CompetitionController extends Controller
     {
         $data = Competition::select(DB::raw('DAYNAME(date) as day'), 'competitions.id', 'title', 'date', 'start_at', 'ends_at', 'name', 'venue', 'society_id')
             ->join('societies', 'societies.id', '=', 'competitions.society_id')
-            ->orderByRaw('DAY(date)')
+            ->orderByRaw('DAY(date), start_at')
             ->get()
-            ->groupBy('day');
+            ->groupBy('date');
+
+        // $coll = $data->map(function ($item) {
+        //     return $item->map(function ($order) {
+        //         return collect($order)->sortBy('start_at');
+        //     });
+        // });
+        // return $coll;
+
+        return $data;
 
         return new GeneralResource($data);
     }
