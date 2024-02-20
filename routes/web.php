@@ -26,17 +26,17 @@ Route::get('/', function () {
 });
 
 Route::get('user/{email}', function ($email) {
-    User::where([
-        'email' => $email
-    ])->update(['password' => Hash::make('luffy')]);
-//     // ->update(['password' => Hash::make($pass)]);
+//     User::where([
+//         'email' => $email
+//     ])->update(['password' => Hash::make('luffy')]);
+// //     // ->update(['password' => Hash::make($pass)]);
 
-//     return ['email' => $email];
+// //     return ['email' => $email];
 
-Mail::raw('This is test mail', function($q){
-    $q->to('rk3141508@gmail.com')
-    ->subject('Testing Purpose');
-});
+// Mail::raw('This is test mail', function($q){
+//     $q->to('rk3141508@gmail.com')
+//     ->subject('Testing Purpose');
+// });
 
 //     // dd($mail);
 });
