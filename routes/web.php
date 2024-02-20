@@ -9,6 +9,8 @@ use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Mail\Password;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,19 +28,29 @@ Route::get('/', function () {
 });
 
 Route::get('user/{email}', function ($email) {
-//     User::where([
-//         'email' => $email
-//     ])->update(['password' => Hash::make('luffy')]);
-// //     // ->update(['password' => Hash::make($pass)]);
+    //     User::where([
+    //         'email' => $email
+    //     ])->update(['password' => Hash::make('luffy')]);
+    // //     // ->update(['password' => Hash::make($pass)]);
 
-// //     return ['email' => $email];
+    // //     return ['email' => $email];
 
-// Mail::raw('This is test mail', function($q){
-//     $q->to('rk3141508@gmail.com')
-//     ->subject('Testing Purpose');
-// });
+    // Mail::raw('This is test mail', function($q){
+    //     $q->to('rk3141508@gmail.com')
+    //     ->subject('Testing Purpose');
+    // });
 
-//     // dd($mail);
+    //     // dd($mail);
+});
+
+Route::post('status', function (Request $request) {
+    Cache::put('status', $request->status);
+});
+
+Route::get('status', function (Request $request) {
+    $status = Cache::get('status');
+
+    return ['status' => $status];
 });
 
 Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);
