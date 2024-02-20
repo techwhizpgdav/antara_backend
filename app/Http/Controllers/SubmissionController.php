@@ -36,10 +36,11 @@ class SubmissionController extends Controller
         if (!$participation) {
             return response()->json(['message' => 'Please make sure you are registered for this competition.'], 404);
         }
+        $participation = DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id, 'leader' => 1])->first();
 
         $user->competitionSubmissions()->attach($competition, [
             'url' => $request->url, 'remarks' => $request->remarks, 'created_at' => now(), 'updated_at' => now(),
-            'team_size' => $participation->team_size, 'team_code' => $request->team_code,
+            'team_size' => $participation->team_size, 'team_code' => $participation->team_code,
             'leader' => $participation->leader
         ]);
 
