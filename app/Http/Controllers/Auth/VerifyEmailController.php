@@ -67,8 +67,6 @@ class VerifyEmailController extends Controller
 
         // Optionally, you can log in the user or redirect to a login page
 
-        return redirect()->intended(
-            env('FRONTEND_URL') . '/dashboard'
-        );
+        return redirect('https://arohana.pgdavhyperion.in');
     }
 }
