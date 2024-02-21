@@ -47,7 +47,7 @@ class SubmissionController extends Controller
         $user->competitionSubmissions()->attach($competition, [
             'url' => $request->url, 'remarks' => $request->remarks, 'created_at' => now(), 'updated_at' => now(),
             'team_size' => $participation->team_size, 'team_code' => $participation->team_code,
-            'leader' => $participation->leader
+            'leader' => $participation->leader, 'paymnet_ss' => $participation->payment_ss, 'sponsor_link' => $participation->sponsor_link
         ]);
 
         return new GeneralResource($user);
