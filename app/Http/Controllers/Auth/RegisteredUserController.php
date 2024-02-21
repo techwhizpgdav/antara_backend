@@ -36,7 +36,11 @@ class RegisteredUserController extends Controller
         ]);
 
         $identity = $request->file( 'college_id' )->store( 'identity');
-        $sponsor_task = $request->file( 'screenshot' )->store( 'sponsor_task');
+        if ($request->hasFile('screenshot')) {
+            $sponsor_task = $request->file( 'screenshot' )->store( 'sponsor_task');
+        } else {
+            $sponsor_task = null;
+        }
 
         $user = User::create([
             'name' => $request->name,
