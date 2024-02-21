@@ -40,7 +40,7 @@ class ParticipationController extends Controller
             'screenshot' => 'nullable|image|max:2048'
         ]);
 
-        if (DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id])->exists()) {
+        if (DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id, 'allowed' => 1])->exists()) {
             return response()->json(['message' => 'You can participate only once.']);
         }
 
