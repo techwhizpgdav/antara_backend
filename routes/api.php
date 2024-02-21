@@ -38,10 +38,10 @@ Route::get('/auth-user', [AuthenticatedSessionController::class, 'me'])->middlew
 Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);
 Route::apiResource('categories', CategoryController::class);
-Route::apiResource('participations', ParticipationController::class);
+Route::apiResource('participations', ParticipationController::class)->middleware('auth:api');
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
-Route::apiResource('submissions', SubmissionController::class);
+Route::apiResource('submissions', SubmissionController::class)->middleware('auth:api');
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
 Route::get('my-team', [ParticipationController::class, 'myTeam'])->middleware('auth:api');
