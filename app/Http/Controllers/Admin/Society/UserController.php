@@ -19,7 +19,7 @@ class UserController extends Controller
 
         $user = User::find(auth()->user()->id)->societies;
         $adminCompetitions = Competition::with(['user' => function ($q) {
-            $q->select(['name', 'email', 'college'])->wherePivot('leader', 1)->withPivot(['id', 'team', 'team_size', 'remarks', 'team_code', 'allowed', 'leader', 'payment_ss', 'sponsor_link']);
+            $q->select(['name', 'email', 'college'])->wherePivot(['leader', 1, 'allowed' => 1])->withPivot(['id', 'team', 'team_size', 'remarks', 'team_code', 'allowed', 'leader', 'payment_ss', 'sponsor_link']);
         }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get();
         // ->groupBy('title');
 
