@@ -50,7 +50,8 @@ class RegisteredUserController extends Controller
             'college' => $request->college,
             'identity' => $identity,
             'sponsor_task' => $sponsor_task,
-            'instagram_id' => $request->instagram_id
+            'instagram_id' => $request->instagram_id,
+            'pgdav' => $request->pgdav ?? 0,
         ]);
         // ->assignRole('user');
 
