@@ -171,7 +171,7 @@ class CompetitionController extends Controller
 
     public function compByDay()
     {
-        $data = Competition::select(DB::raw('DAYNAME(date) as day'), 'competitions.id', 'title', 'date', 'start_at', 'ends_at', 'name', 'venue', 'society_id')
+        $data = Competition::select(DB::raw('DAYNAME(date) as day'), DB::raw("time_format(start_at, '%h:%i %p') as event_start"), DB::raw("time_format(ends_at, '%h:%i %p') as event_end"), 'competitions.id', 'title', 'date', 'start_at', 'ends_at', 'name', 'venue', 'society_id')
             ->join('societies', 'societies.id', '=', 'competitions.society_id')
             ->orderByRaw('DAY(date), start_at')
             ->get()
