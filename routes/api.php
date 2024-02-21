@@ -52,18 +52,18 @@ Route::get('timeline', [CompetitionController::class, 'compByDay']);
 
 Route::apiResource('sendpass', MailController::class);
 
-Route::group(['prefix' => 'admin'], function () {
-    Route::group(['prefix' => 'hyperion'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
+    Route::group(['prefix' => 'hyperion', 'role' => 'hyperion'], function () {
         // Hyperion routes
         Route::get('counts',[AdminUserController::class,'getCounts']);
         Route::get('unverified-users',[AdminUserController::class,'unverifiedUsers']);
         Route::get('recparticipate',[AdminUserController::class,'recentPaticipate']);
     });
-    Route::get('participations', [SocietyUserController::class, 'participations']);
-    Route::post('download-card/{user}', [SocietyUserController::class, 'downloadCard']);
-    Route::get('submissions', [SocietyUserController::class, 'submissions']);
-    Route::put('submissions/{id}', [SocietyUserController::class, 'editSubmissions']);
-    Route::get('team/{code}', [SocietyUserController::class, 'teamDetails']);
+    Route::get('participations', [SocietyUserController::class, 'participations'])->middleware(['role:member']);
+    Route::post('download-card/{user}', [SocietyUserController::class, 'downloadCard'])->middleware(['role:member']);
+    Route::get('submissions', [SocietyUserController::class, 'submissions'])->middleware(['role:member']);
+    Route::put('submissions/{id}', [SocietyUserController::class, 'editSubmissions'])->middleware(['role:member']);
+    Route::get('team/{code}', [SocietyUserController::class, 'teamDetails'])->middleware(['role:member']);
     // Society Routes
 });
 // Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
