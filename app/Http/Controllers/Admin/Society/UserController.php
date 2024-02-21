@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         $user = User::find(auth()->user()->id)->societies;
         $adminCompetitions = Competition::with(['userSubmissions' => function ($q) {
-            $q->select(['name', 'email', 'college'])->withPivot(['id', 'url', 'team_code', 'team_size', 'remarks', 'status']);
+            $q->select(['name', 'email', 'college'])->withPivot(['id', 'url', 'team_code', 'team_size', 'remarks', 'status', 'sponsor_link', 'payment_ss']);
         }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get();
 
         return new GeneralResource($adminCompetitions);
