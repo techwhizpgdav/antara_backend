@@ -32,7 +32,8 @@ class RegisteredUserController extends Controller
             'screenshot' => ['required_if:pgdav,true', 'image'],
             'phone' => ['required', 'digits:10'],
             'college' => ['required', 'string'],
-            'instagram_id' => ['nullable', 'string']
+            'instagram_id' => ['nullable', 'string'],
+            'pgdav' => ['nullable', 'boolean']
         ]);
 
         $identity = $request->file( 'college_id' )->store( 'identity');
