@@ -91,7 +91,7 @@
           <td style="width: 596px; vertical-align: top; padding-left: 0; padding-right: 0; padding-top: 15px; padding-bottom: 15px;" width="596">
 
             <!-- Your logo is here -->
-            <img style="object-fit: contain width: 85px; max-width: 85px; height: 85px; max-height: 85px; text-align: center; color: #ffffff;" alt="Logo" src="https://arohana.b-cdn.net/Hyperion%20Core%20Team/hyperionlogo.png" align="center">
+            <img style="object-fit: contain text-align: center; color: #ffffff;" alt="Logo" src="https://arohana.b-cdn.net/Hyperion%20Core%20Team/hyperionlogo.png" align="center" height="56px" width="56px">
 
           </td>
         </tr>
