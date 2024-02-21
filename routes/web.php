@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Hyperion\UserController;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -27,11 +28,7 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-Route::get('user', function () {
-User::where('email', 'pgdavrudra@gmail.com')->update(['password' => Hash::make('mugiwara')]);
-});
-
-Route::get('test/{code}', [ParticipationController::class, 'teamDetails']);
+Route::get('test/{user}', [UserController::class, 'issuePass']);
 
 
 require __DIR__ . '/auth.php';

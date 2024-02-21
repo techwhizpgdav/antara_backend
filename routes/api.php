@@ -58,6 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
         Route::get('counts',[AdminUserController::class,'getCounts']);
         Route::get('unverified-users',[AdminUserController::class,'unverifiedUsers']);
         Route::get('recparticipate',[AdminUserController::class,'recentPaticipate']);
+        Route::put('issue-pass/{user}',[AdminUserController::class,'issuePass']);
     });
     Route::get('participations', [SocietyUserController::class, 'participations'])->middleware(['role:member']);
     Route::post('download-card/{user}', [SocietyUserController::class, 'downloadCard'])->middleware(['role:member']);

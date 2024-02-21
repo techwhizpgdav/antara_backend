@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -13,15 +14,15 @@ class SendPass extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $maildata;
+    public $user_name;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($maildata)
+    public function __construct($user_name)
     {
         //
-        $this->maildata=$maildata;
+        $this->user_name = $user_name;
     }
 
     /**
@@ -30,8 +31,8 @@ class SendPass extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            
-            subject: 'Send Pass',
+            from: new Address(config('mail.from.address'), config('app.name')),
+            subject: 'Arohana: Entry Pass for Festival🎟️',
         );
     }
 
@@ -41,7 +42,7 @@ class SendPass extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'pass',
+            view: 'vendor.mails.pass',
         );
     }
 
