@@ -25,13 +25,14 @@ class SponsorController extends Controller
     {
         //
         $request->validate([
+            'society_id' => 'required|integer|exists:societies,id',
             'logo' => 'required|url',
             'title' => 'required|string',
             'company_name' => 'required|string',
             'web_url'  => 'required|url',
         ]);
 
-        $data = Sponsor::create($request->only(['logo','title','company_name','web_url']));
+        $data = Sponsor::create($request->only(['logo','title','company_name','web_url','society_id']));
 
         return new GeneralResource($data);
     }
@@ -54,6 +55,7 @@ class SponsorController extends Controller
     {
         //
         $request->validate([
+            'society_id' => 'required|integer|exists:societies,id',
             'logo' => 'required|url',
             'title' => 'required|string',
             'company_name' => 'required|string',
@@ -61,7 +63,7 @@ class SponsorController extends Controller
         ]);
 
         $record = Sponsor::findOrFail($id);
-        $update = $record->update($request->only(['logo','title','company_name','web_url']));
+        $update = $record->update($request->only(['logo','title','company_name','web_url','society_id']));
 
         return response()->json(['data' => $update], 200);
     }

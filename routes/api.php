@@ -15,6 +15,7 @@ use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Admin\Hyperion\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Society\UserController as SocietyUserController;
+use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SubmissionController;
 
 /*
@@ -41,6 +42,7 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('participations', ParticipationController::class)->middleware('auth:api');
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
+Route::apiResource('sponsors',SponsorController::class);
 Route::apiResource('submissions', SubmissionController::class)->middleware('auth:api');
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 

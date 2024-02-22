@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Category::factory(10)->create();
         // \App\Models\Society::factory(10)->create();
         // \App\Models\Competition::factory(10)->create();
+         \App\Models\Sponsor::factory(10)->create();
         $this->call([
             RoleSeeder::class
         ]);
