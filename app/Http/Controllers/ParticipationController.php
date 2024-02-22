@@ -20,7 +20,7 @@ class ParticipationController extends Controller
     public function index(Request $request)
     {
         $data = User::with(['competitions' => function ($q) {
-            $q->select(['competitions.id', 'title', 'category_id'])->withPivot(['leader'])->wherePivot(['allowed' => 1]);
+            $q->select(['competitions.id', 'title', 'category_id'])->withPivot(['leader'])->wherePivot('allowed', 1);
         }])->where('id', $request->user()->id)->select(['name', 'email', 'id'])->get();
 
         return new GeneralResource($data);
