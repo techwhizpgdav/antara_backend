@@ -29,7 +29,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'college_id' => ['required', 'image'],
-            // 'screenshot' => ['required_if:pgdav,true', 'image'],
+            'sponsor_task' => ['required_if:pgdav,true', 'image'],
             'phone' => ['required', 'digits:10'],
             'college' => ['required', 'string'],
             'instagram_id' => ['nullable', 'string'],
@@ -37,8 +37,8 @@ class RegisteredUserController extends Controller
         ]);
 
         $identity = $request->file( 'college_id' )->store( 'identity');
-        if ($request->hasFile('screenshot')) {
-            $sponsor_task = $request->file( 'screenshot' )->store( 'sponsor_task');
+        if ($request->hasFile('sponsor_task')) {
+            $sponsor_task = $request->file( 'sponsor_task' )->store( 'sponsor_task');
         } else {
             $sponsor_task = null;
         }
