@@ -52,7 +52,7 @@ class CompetitionController extends Controller
             'sponsor_task' => 'nullable|boolean',
             'remarks' => 'boolean',
             'remarks_label' => 'nullable|string',
-            'whatsapp_group' => 'nullable|string'
+            'whatsapp_group' => 'nullable|url:https'
         ]);
 
         $society = SocietyUser::where('user_id', auth()->user()->id)->first();
@@ -133,7 +133,7 @@ class CompetitionController extends Controller
             'sponsor_task' => 'nullable|boolean',
             'remarks' => 'boolean',
             'remarks_label' => 'nullable|string',
-            'whatsapp_group' => 'nullable|string'
+            'whatsapp_group' => 'nullable|url:https'
         ]);
 
         $update = $competition->update([
