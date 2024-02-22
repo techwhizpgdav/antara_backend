@@ -38,7 +38,8 @@ class Competition extends Model
         'maximum_size',
         'remarks',
         'sponsor_task',
-        'remarks_label'
+        'remarks_label',
+        'whatsapp_group'
     ];
 
     /**
