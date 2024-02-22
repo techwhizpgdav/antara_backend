@@ -78,4 +78,12 @@ class SponsorController extends Controller
         $delete = $record->delete();
         return response()->json(['data' => $delete], 200);
     }
+
+    public function getbytitle(){
+        $sponsors = Sponsor::all();
+
+        $groupedsponsors = $sponsors->groupBy('title');
+
+        return new GeneralResource($groupedsponsors);
+    }
 }

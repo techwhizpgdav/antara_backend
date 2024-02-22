@@ -43,6 +43,7 @@ Route::apiResource('participations', ParticipationController::class)->middleware
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
 Route::apiResource('sponsors',SponsorController::class);
+Route::get('sponsor/title',[SponsorController::class,'getbytitle']);
 Route::apiResource('submissions', SubmissionController::class)->middleware('auth:api');
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
@@ -72,3 +73,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
 // Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
 // Route::get('admin/notverify', [AdminUserController::class, 'pendingCount']);
 // Route::get('admin/notverify/list', [AdminUserController::class, 'notVerifiedUsers']);
+
+
