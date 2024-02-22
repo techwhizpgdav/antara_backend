@@ -20,7 +20,7 @@ class ParticipationController extends Controller
     public function index(Request $request)
     {
         $data = User::with(['competitions' => function ($q) {
-            $q->select(['competitions.id', 'title', 'category_id'])->withPivot(['leader']);
+            $q->select(['competitions.id', 'title', 'category_id'])->withPivot(['leader'])->wherePivot('allowed', 1);
         }])->where('id', $request->user()->id)->select(['name', 'email', 'id'])->get();
 
         return new GeneralResource($data);
@@ -40,7 +40,7 @@ class ParticipationController extends Controller
             'screenshot' => 'nullable|image|max:2048'
         ]);
 
-        if (DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id])->exists()) {
+        if (DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id, 'allowed' => 1])->exists()) {
             return response()->json(['message' => 'You can participate only once.']);
         }
 

@@ -34,7 +34,7 @@ class SubmissionController extends Controller
         $user = User::findOrFail($request->user()->id);
         $competition = Competition::findOrFail($request->competition_id);
 
-        $participation = DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id, 'leader' => 1])->first();
+        $participation = DB::table('competition_user')->where(['user_id' => $request->user()->id, 'competition_id' => $request->competition_id, 'leader' => 1, 'allowed' => 1])->first();
         if (!$participation) {
             return response()->json(['message' => 'Please make sure you are registered for this competition.'], 404);
         }
