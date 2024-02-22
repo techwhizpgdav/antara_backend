@@ -53,7 +53,7 @@ Route::get('timeline', [CompetitionController::class, 'compByDay']);
 Route::apiResource('sendpass', MailController::class);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
-    Route::group(['prefix' => 'hyperion', 'role' => 'hyperion'], function () {
+    Route::group(['prefix' => 'hyperion', 'middleware'=> ['role:hyperion']], function () {
         // Hyperion routes
         Route::get('counts',[AdminUserController::class,'getCounts']);
         Route::get('unverified-users',[AdminUserController::class,'unverifiedUsers']);

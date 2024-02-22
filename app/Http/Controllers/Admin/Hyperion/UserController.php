@@ -24,7 +24,7 @@ class UserController extends Controller
             'society_count' => DB::table('societies')->count(),
             'competition_count' => DB::table('competitions')->count(),
             'participation_count' => DB::table('competition_user')->count(),
-            'unverified_users' => DB::table('users')->where('is_verified', 0)->count()
+            'instagram' => DB::table('users')->whereNotNull('instagram_id')->count()
 
         ];
         return new GeneralResource($data);
