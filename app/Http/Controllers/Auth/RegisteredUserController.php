@@ -30,7 +30,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'college_id' => ['required', 'image'],
             'sponsor_task' => ['required_if:pgdav,true', 'image'],
-            'phone' => ['required', 'digits:10'],
+            'phone' => ['required', 'digits:10', 'unique:users,phone_number'],
             'college' => ['required', 'string'],
             'instagram_id' => ['nullable', 'string'],
             'pgdav' => ['nullable', 'boolean']
