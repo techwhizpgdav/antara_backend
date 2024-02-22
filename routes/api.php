@@ -15,6 +15,7 @@ use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Admin\Hyperion\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Society\UserController as SocietyUserController;
+use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SubmissionController;
 
 /*
@@ -41,13 +42,15 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('participations', ParticipationController::class)->middleware('auth:api');
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
+Route::apiResource('sponsors',SponsorController::class);
+Route::get('sponsor/title',[SponsorController::class,'getbytitle']);
 Route::apiResource('submissions', SubmissionController::class)->middleware('auth:api');
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
 Route::get('my-team', [ParticipationController::class, 'myTeam'])->middleware('auth:api');
 Route::get('my-team/{code}', [ParticipationController::class, 'teamDetails'])->middleware('auth:api');
 
-Route::get('users/{role}', [UserController::class, 'index']);
+Route::get('teams/{role}', [TeamController::class, 'getTeamByRole']);
 Route::get('timeline', [CompetitionController::class, 'compByDay']);
 
 Route::apiResource('sendpass', MailController::class);
@@ -70,3 +73,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
 // Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
 // Route::get('admin/notverify', [AdminUserController::class, 'pendingCount']);
 // Route::get('admin/notverify/list', [AdminUserController::class, 'notVerifiedUsers']);
+
+
