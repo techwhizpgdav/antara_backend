@@ -14,6 +14,7 @@ use App\Mail\SendPass;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -51,10 +52,10 @@ class UserController extends Controller
         return new GeneralResource($recentParticipations);
     }
 
-    public function issuePass($id): JsonResource
+    public function issuePass(Request $request, $id): JsonResource
     {
-        $data = DB::transaction(function () use ($id) {
-
+        $data = DB::transaction(function () use ($id, $request) {
+            Log::channel('passes')->info('pass' . time(), ['user_id' => $request->user()->id, 'pass_sent_to' => $id, 'ip' => $request->ip()]);
             $user = User::where('fest_pass', null)->findOrFail($id);
             $user->update(["fest_pass" => Str::uuid(), 'is_verified' => 1]);
             $lock = Cache::lock($user->email, 7);
