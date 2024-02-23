@@ -53,6 +53,8 @@ Route::get('my-team/{code}', [ParticipationController::class, 'teamDetails'])->m
 Route::get('teams/{role}', [TeamController::class, 'getTeamByRole']);
 Route::get('timeline', [CompetitionController::class, 'compByDay']);
 
+Route::post('user/upload-sponsor', [SponsorController::class, 'uploadSponsorImage'])->middleware('auth:api');
+
 Route::apiResource('sendpass', MailController::class);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {

@@ -36,9 +36,9 @@ class RegisteredUserController extends Controller
             'pgdav' => ['nullable', 'boolean']
         ]);
 
-        $identity = $request->file( 'college_id' )->store( 'identity');
+        $identity = $request->file('college_id')->store('identity');
         if ($request->hasFile('sponsor_task')) {
-            $sponsor_task = $request->file( 'sponsor_task' )->store( 'sponsor_task');
+            $sponsor_task = $request->file('sponsor_task')->store('sponsor_task');
         } else {
             $sponsor_task = null;
         }
