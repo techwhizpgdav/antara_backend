@@ -26,8 +26,8 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed', 'min:8'],
+            'password' => ['required', 'confirmed', 'min:8'],
             'college_id' => ['required', 'image'],
             // 'sponsor_task' => ['required_if:pgdav,true', 'image'],
             'phone' => ['required', 'digits:10', 'unique:users,phone_number'],
