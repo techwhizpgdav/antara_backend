@@ -11,7 +11,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\GeneralResource;
 use App\Jobs\SendInvite;
 use App\Mail\SendPass;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -32,11 +34,12 @@ class UserController extends Controller
 
     public function unverifiedUsers()
     {
-        $unverified_user = User::where('is_verified', false)->paginate(20);
+        $unverified_user = User::whereNull('fest_pass')->paginate(30);
         return new GeneralResource($unverified_user);
     }
 
-    public function recentPaticipate(){
+    public function recentPaticipate()
+    {
         $recentParticipations = DB::table('competition_user')
             ->join('users', 'competition_user.user_id', '=', 'users.id')
             ->join('competitions', 'competition_user.competition_id', '=', 'competitions.id')
@@ -48,10 +51,21 @@ class UserController extends Controller
         return new GeneralResource($recentParticipations);
     }
 
-    public function issuePass(User $user): JsonResource
+    public function issuePass($id): JsonResource
     {
-        $user->update(["fest_pass" => Str::uuid()]);
-        SendInvite::dispatch($user->email, $user->name);
-        return new GeneralResource($user);
+        $data = DB::transaction(function () use ($id) {
+
+            $user = User::where('fest_pass', null)->findOrFail($id);
+            $user->update(["fest_pass" => Str::uuid(), 'is_verified' => 1]);
+            $lock = Cache::lock($user->email, 7);
+            if (!$lock->get()) {
+                throw new HttpResponseException(response()->json(['message' => "Failed to acquire lock"], 423));
+            }
+            Mail::to($user->email)
+                ->send(new SendPass(Str::upper($user->name)));
+            // SendInvite::dispatch($user->email, $user->name);
+            return $user;
+        });
+        return new GeneralResource($data);
     }
 }
