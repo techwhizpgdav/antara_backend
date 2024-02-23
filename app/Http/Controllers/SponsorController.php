@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\GeneralResource;
+use App\Models\SocietyUser;
 use App\Models\Sponsor;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SponsorController extends Controller
 {
@@ -14,8 +16,8 @@ class SponsorController extends Controller
      */
     public function index()
     {
-        //
-        $data = Sponsor::all();
+        $user = auth()->user();
+        $data = $user->societySponsors;
         return new GeneralResource($data);
     }
 
@@ -26,14 +28,22 @@ class SponsorController extends Controller
     {
         //
         $request->validate([
-            'society_id' => 'required|integer|exists:societies,id',
             'logo' => 'required|url',
             'title' => 'required|string',
             'company_name' => 'required|string',
             'web_url'  => 'required|url',
         ]);
-
-        $data = Sponsor::create($request->only(['logo', 'title', 'company_name', 'web_url', 'society_id']));
+        $society = SocietyUser::where('user_id', $request->user()->id)->first();
+        if (!$society) {
+            return response()->json(['message' => 'Unauthorized Access'], 403);
+        }
+        $data = Sponsor::create([
+            'logo' => $request->logo,
+            'title' => $request->title,
+            'company_name' => $request->company_name,
+            'web_url' => $request->web_url,
+            'society_id' => $society->society_id
+        ]);
 
         return new GeneralResource($data);
     }
@@ -55,7 +65,6 @@ class SponsorController extends Controller
     {
         //
         $request->validate([
-            'society_id' => 'required|integer|exists:societies,id',
             'logo' => 'required|url',
             'title' => 'required|string',
             'company_name' => 'required|string',

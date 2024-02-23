@@ -132,4 +132,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     {
         return $this->belongsToMany(Competition::class, 'submissions');
     }
+
+    public function societySponsors(): HasManyThrough
+    {
+        return $this->hasManyThrough(Sponsor::class, SocietyUser::class, 'user_id', 'society_id', 'id', 'society_id')->with(['society']);
+    }
 }

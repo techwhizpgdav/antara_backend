@@ -42,8 +42,7 @@ Route::apiResource('categories', CategoryController::class);
 Route::apiResource('participations', ParticipationController::class)->middleware('auth:api');
 Route::apiResource('rules', RuleController::class);
 Route::apiResource('rounds', RoundController::class);
-Route::apiResource('sponsors',SponsorController::class);
-Route::get('sponsor/title',[SponsorController::class,'getbytitle']);
+Route::get('sponsor/title', [SponsorController::class, 'getbytitle']);
 Route::apiResource('submissions', SubmissionController::class)->middleware('auth:api');
 Route::get('category-competitions/{id}', [CategoryController::class, 'competitions']);
 
@@ -58,13 +57,14 @@ Route::post('user/upload-sponsor', [SponsorController::class, 'uploadSponsorImag
 Route::apiResource('sendpass', MailController::class);
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
-    Route::group(['prefix' => 'hyperion', 'middleware'=> ['role:hyperion']], function () {
+    Route::group(['prefix' => 'hyperion', 'middleware' => ['role:hyperion']], function () {
         // Hyperion routes
-        Route::get('counts',[AdminUserController::class,'getCounts']);
-        Route::get('unverified-users',[AdminUserController::class,'unverifiedUsers']);
-        Route::get('recparticipate',[AdminUserController::class,'recentPaticipate']);
-        Route::put('issue-pass/{user}',[AdminUserController::class,'issuePass']);
+        Route::get('counts', [AdminUserController::class, 'getCounts']);
+        Route::get('unverified-users', [AdminUserController::class, 'unverifiedUsers']);
+        Route::get('recparticipate', [AdminUserController::class, 'recentPaticipate']);
+        Route::put('issue-pass/{user}', [AdminUserController::class, 'issuePass']);
     });
+    Route::apiResource('sponsors', SponsorController::class)->middleware(['role:member']);
     Route::get('participations', [SocietyUserController::class, 'participations'])->middleware(['role:member']);
     Route::post('download-card/{user}', [SocietyUserController::class, 'downloadCard'])->middleware(['role:member']);
     Route::get('submissions', [SocietyUserController::class, 'submissions'])->middleware(['role:member']);
@@ -75,5 +75,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
 // Route::get('admin/stats', [AdminUserController::class, 'getCounts']);
 // Route::get('admin/notverify', [AdminUserController::class, 'pendingCount']);
 // Route::get('admin/notverify/list', [AdminUserController::class, 'notVerifiedUsers']);
-
-
