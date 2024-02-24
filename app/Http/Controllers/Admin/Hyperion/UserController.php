@@ -33,7 +33,7 @@ class UserController extends Controller
         return new GeneralResource($data);
     }
 
-    public function unverifiedUsers()
+    public function unverifiedUsers(Request $request)
     {
         $unverified_user = User::whereNull('fest_pass')->paginate(30);
         return new GeneralResource($unverified_user);
