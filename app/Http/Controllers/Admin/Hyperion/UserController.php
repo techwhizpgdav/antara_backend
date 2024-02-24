@@ -39,7 +39,7 @@ class UserController extends Controller
             $unverified_user = User::where(function ($query) use ($request) {
                 $query->where('email', 'like', '%' . $request->search . '%')
                     ->orWhere('name',  'like', '%' . $request->search . '%');
-            })->whereNull('fest_pass')->orderBy('created_at', 'desc')->paginate();
+            })->whereNull('fest_pass')->orderBy('created_at', 'desc')->paginate(30);
         } else {
             $unverified_user = User::whereNull('fest_pass')->paginate(30);
         }
