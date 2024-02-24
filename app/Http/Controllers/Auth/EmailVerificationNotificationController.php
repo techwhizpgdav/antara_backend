@@ -22,7 +22,8 @@ class EmailVerificationNotificationController extends Controller
         }
 
         $header = $request->header('Authorization');
-        $token = str_replace("Bearer", "", $header);
+        $token = str_replace("Bearer ", "", $header);
+        // dd($token);
         $url = url("/verify-email?token=$token");
         Mail::to($request->user()->email)->send(new SendVerificationMail($url));
 
