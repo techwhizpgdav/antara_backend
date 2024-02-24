@@ -71,7 +71,7 @@ class UserController extends Controller
             }
             // Mail::to($user->email)
             //     ->send(new SendPass(Str::upper($user->name)));
-            SendInvite::dispatch($user->email, $user->name);
+            SendInvite::dispatch($user->email, $user->name)->delay(now()->addSeconds(15));
             return $user;
         });
         return new GeneralResource($data);
