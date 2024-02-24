@@ -69,9 +69,9 @@ class UserController extends Controller
             if (!$lock->get()) {
                 throw new HttpResponseException(response()->json(['message' => "Failed to acquire lock"], 423));
             }
-            Mail::to($user->email)
-                ->send(new SendPass(Str::upper($user->name)));
-            // SendInvite::dispatch($user->email, $user->name);
+            // Mail::to($user->email)
+            //     ->send(new SendPass(Str::upper($user->name)));
+            SendInvite::dispatch($user->email, $user->name);
             return $user;
         });
         return new GeneralResource($data);
