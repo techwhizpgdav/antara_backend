@@ -1,68 +1,11 @@
+<!-- Free to use, HTML email template designed & built by FullSphere. Learn more about us at www.fullsphere.co.uk -->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
 <head>
-    <title></title>
-    <!--[if !mso]><!-- -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!--<![endif]-->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <style type="text/css">
-      #outlook a {
-        padding: 0;
-      }
 
-      .ReadMsgBody {
-        width: 100%;
-      }
-
-      .ExternalClass {
-        width: 100%;
-      }
-
-      .ExternalClass * {
-        line-height: 100%;
-      }
-
-      body {
-        margin: 0;
-        padding: 0;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-      }
-
-      table,
-      td {
-        border-collapse: collapse;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-      }
-
-      img {
-        border: 0;
-        height: auto;
-        line-height: 100%;
-        outline: none;
-        text-decoration: none;
-        -ms-interpolation-mode: bicubic;
-      }
-
-      p {
-        display: block;
-        margin: 13px 0;
-      }
-    </style>
-    <!--[if !mso]><!-->
-    <style type="text/css">
-      @media only screen and (max-width:480px) {
-        @-ms-viewport {
-          width: 320px;
-        }
-
-        @viewport {
-          width: 320px;
-        }
-      }
-    </style>
-    <!--<![endif]-->
-    <!--[if mso]>
+  <!--[if gte mso 9]>
   <xml>
     <o:OfficeDocumentSettings>
       <o:AllowPNG/>
@@ -70,303 +13,162 @@
     </o:OfficeDocumentSettings>
   </xml>
   <![endif]-->
-    <!--[if lte mso 11]>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="x-apple-disable-message-reformatting">
+  <!--[if !mso]><!-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--<![endif]-->
+
+  <!-- Your title goes here -->
+  <title>Newsletter</title>
+  <!-- End title -->
+
+  <!-- Start stylesheet -->
   <style type="text/css">
-    .outlook-group-fix {
-      width:100% !important;
+    a,
+    a[href],
+    a:hover,
+    a:link,
+    a:visited {
+      /* This is the link colour */
+      text-decoration: none !important;
+      color: #0000EE;
+    }
+
+    .link {
+      text-decoration: underline !important;
+    }
+
+    p,
+    p:visited {
+      /* Fallback paragraph style */
+      font-size: 15px;
+      line-height: 24px;
+      font-family: 'Helvetica', Arial, sans-serif;
+      font-weight: 300;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    h1 {
+      /* Fallback heading style */
+      font-size: 22px;
+      line-height: 24px;
+      font-family: 'Helvetica', Arial, sans-serif;
+      font-weight: normal;
+      text-decoration: none;
+      color: #000000;
+    }
+
+    .ExternalClass p,
+    .ExternalClass span,
+    .ExternalClass font,
+    .ExternalClass td {
+      line-height: 100%;
+    }
+
+    .ExternalClass {
+      width: 100%;
     }
   </style>
-  <![endif]-->
+  <!-- End stylesheet -->
 
-    <!--[if !mso]><!-->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700" rel="stylesheet" type="text/css">
-    <style type="text/css">
-      @import url(https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700);
-    </style>
-    <!--<![endif]-->
-    <style type="text/css">
-      @media only screen and (min-width:480px) {
+</head>
 
-        .mj-column-per-100,
-        * [aria-labelledby="mj-column-per-100"] {
-          width: 100% !important;
-        }
-      }
-    </style>
-  </head>
+<!-- You can change background colour here -->
 
-  <body style="background: #F9F9F9;">
-    <div style="background-color:#F9F9F9;">
-      <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="width:640px;">
-          <tr>
-            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-        <![endif]-->
-      <style type="text/css">
-        html,
-        body,
-        * {
-          -webkit-text-size-adjust: none;
-          text-size-adjust: none;
-        }
+<body style="text-align: center; margin: 0; padding-top: 10px; padding-bottom: 10px; padding-left: 0; padding-right: 0; -webkit-text-size-adjust: 100%;background-color: #f2f4f6; color: #000000" align="center">
 
-        a {
-          color: #1EB0F4;
-          text-decoration: none;
-        }
+  <!-- Fallback force center content -->
+  <div style="text-align: center;">
 
-        a:hover {
-          text-decoration: underline;
-        }
-      </style>
-      <div style="margin:0px auto;max-width:640px;background:transparent;">
-        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:transparent;" align="center" border="0">
-          <tbody>
-            <tr>
-              <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:40px 0px;">
-                <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:640px;">
-        <![endif]-->
-                <div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
-                  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                    <tbody>
-                      <tr>
-                        <td style="word-break:break-word;font-size:0px;padding:0px;" align="center">
-                          <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0">
-                            <tbody>
-                              {{-- <tr> --}}
-                                {{-- <td style="width:138px;"><a href="https://discordapp.com/" target="_blank"><img alt="" title="" height="38px" src="https://cdn.discordapp.com/email_assets/2ec94ed90b8e95d764f2a1c96f33139e.png" style="border:none;border-radius:;display:block;outline:none;text-decoration:none;width:100%;height:38px;" width="138"></a></td> --}}
-                              {{-- </tr> --}}
-                            </tbody>
-                          </table>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-      <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="width:640px;">
-          <tr>
-            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-        <![endif]-->
-      <div style="max-width:640px;margin:0 auto;box-shadow:0px 1px 5px rgba(0,0,0,0.1);border-radius:4px;overflow:hidden">
-        <div style="margin:0px auto;max-width:640px;background:#7289DA url(https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png) top center / cover no-repeat;">
-          <!--[if mso | IE]>
-        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:640px;">
-          <v:fill origin="0.5, 0" position="0.5,0" type="tile" src="https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png" />
-          <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
-        <![endif]-->
-          <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#7289DA url(https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png) top center / cover no-repeat;" align="center" border="0" background="https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png">
-            <tbody>
-              <tr>
-                <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:57px;">
-                  <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:undefined;width:640px;">
-        <![endif]-->
-                  <div style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">Welcome to Hyperion!</div>
-                  <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!--[if mso | IE]>
-          </v:textbox>
-        </v:rect>
-        <![endif]-->
-        </div>
-        <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-        <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="width:640px;">
-          <tr>
-            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-        <![endif]-->
-        <div style="margin:0px auto;max-width:640px;background:#ffffff;">
-          <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0">
-            <tbody>
-              <tr>
-                <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:40px 70px;">
-                  <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:640px;">
-        <![endif]-->
-                  <div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
-                    <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                      <tbody>
-                        <tr>
-                          <td style="word-break:break-word;font-size:0px;padding:0px 0px 20px;" align="left">
-                            <div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:24px;text-align:left;">
-                              <p><img src="https://arohana.b-cdn.net/mainposter.png" alt="Party Wumpus" title="None" width="500" style="height: auto;"></p>
+    <!-- Start container for logo -->
+    <table align="center" style="text-align: center; vertical-align: top; width: 600px; max-width: 600px; background-color: #ffffff;" width="600">
+      <tbody>
+        <tr>
+          <td style="width: 596px; vertical-align: top; padding-left: 0; padding-right: 0; padding-top: 15px; padding-bottom: 15px;" width="596">
 
-                              <h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">Hey User,</h2>
-                              <p>Wowwee! Thanks for registering an account with Hyperion! You're the coolest person in all the land (and I've met a lot of really cool people).</p>
-                              <p>Before we get started, we'll need to verify your email.</p>
+            <!-- Your logo is here -->
+            <img style="object-fit: contain text-align: center; color: #ffffff;" alt="Logo" src="https://arohana.b-cdn.net/Hyperion%20Core%20Team/hyperionlogo.png" align="center" height="56px" width="64px">
 
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="center">
-                            <table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0">
-                              <tbody>
-                                <tr>
-                                  <td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#7289DA"><a href={{$verificationLink}} style="text-decoration:none;line-height:100%;background:#7289DA;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;" target="_blank">
-                                     Verify Email
-                                    </a></td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-        <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="width:640px;">
-          <tr>
-            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-        <![endif]-->
-      </div>
-      <div style="margin:0px auto;max-width:640px;background:transparent;">
-        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:transparent;" align="center" border="0">
-          <tbody>
-            <tr>
-              <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px;">
-                <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:640px;">
-        <![endif]-->
-                <div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
-                  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                    <tbody>
-                      <tr>
-                        <td style="word-break:break-word;font-size:0px;">
-                          <div style="font-size:1px;line-height:12px;">&nbsp;</div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-      <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="width:640px;">
-          <tr>
-            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-        <![endif]-->
-      <div style="margin:0 auto;max-width:640px;background:#ffffff;box-shadow:0px 1px 5px rgba(0,0,0,0.1);border-radius:4px;overflow:hidden;">
-        <table cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0">
-          <tbody>
-            <tr>
-              <td style="text-align:center;vertical-align:top;font-size:0px;padding:0px;">
-                <!--[if mso | IE]>
-        <table border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:640px;">
-        <![endif]-->
-                <div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
-                  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                    <tbody>
-                      <tr>
-                        <td style="word-break:break-word;font-size:0px;padding:30px 70px 0px 70px;" align="center">
-                          <div style="cursor:auto;color:#43B581;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:18px;font-weight:bold;line-height:16px;text-align:center;">FUN FACT #16</div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="word-break:break-word;font-size:0px;padding:14px 70px 30px 70px;" align="center">
-                          <div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:22px;text-align:center;">
-                            The popular game ‘Snakes and Ladders’ is India’s contribution to the world.
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-      <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="640" align="center" style="width:640px;">
-          <tr>
-            <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
-        <![endif]-->
-      <div style="margin:0px auto;max-width:640px;background:transparent;">
-        <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:transparent;" align="center" border="0">
-          <tbody>
-            <tr>
-              <td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px;">
-                <!--[if mso | IE]>
-        <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:640px;">
-        <![endif]-->
-                <div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;">
-                  <table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">
-                    <tbody>
-                      <tr>
-                        <td style="word-break:break-word;font-size:0px;padding:0px;" align="center">
-                          <div style="cursor:auto;color:#99AAB5;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:12px;line-height:24px;text-align:center;">
-                            Sent by Hyperion
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="word-break:break-word;font-size:0px;padding:0px;" align="center">
-                          <div style="cursor:auto;color:#99AAB5;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:12px;line-height:24px;text-align:center;">
-                            P.G.D.A.V. College, UoD
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!--[if mso | IE]>
-        </td></tr></table>
-        <![endif]-->
-    </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- End container for logo -->
 
-  </body>
+    <!-- Hero image -->
+    <img style="object-fit: contain width: 600px; max-width: 600px; height: 600px; max-height: 600; text-align: center;" alt="Hero image" src="https://arohana.b-cdn.net/mainposter.png" align="center">
+    <!-- Hero image -->
+
+    <!-- Start single column section -->
+    <table align="center" style="text-align: center; vertical-align: top; width: 600px; max-width: 600px; background-color: #ffffff;" width="600">
+      <tbody>
+        <tr>
+          <td style="width: 596px; vertical-align: top; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 40px;" width="596">
+
+            <h1 style="font-size: 20px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 600; text-decoration: none; color: #000000;">Verification Mail</h1>
+
+            <p style="font-size: 15px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #919293;">Verify your account. </p>
+            <br>
+            <p style="font-size: 15px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #919293;">Please verify your email for the Annual Cultural Festival of P.G.D.A.V.(M) College, UoD: Arohana.</p>
+
+            <p style="font-size: 15px; line-height: 24px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 400; text-decoration: none; color: #919293;">Click on the button given below.</p>
+
+            <!-- Start button (You can change the background colour by the hex code below) -->
+            <a href={{$verificationLink}} target="_blank" style="background-color: #000000; font-size: 15px; line-height: 22px; font-family: 'Helvetica', Arial, sans-serif; font-weight: normal; text-decoration: none; padding: 12px 15px; color: #ffffff; border-radius: 5px; display: inline-block; mso-padding-alt: 0;">
+              <!--[if mso]>
+                  <i style="letter-spacing: 25px; mso-font-width: -100%; mso-text-raise: 30pt;">&nbsp;</i>
+                <![endif]-->
+
+              <span style="mso-text-raise: 15pt; color: #ffffff;">Dashboard</span>
+              <!--[if mso]>
+                  <i style="letter-spacing: 25px; mso-font-width: -100%;">&nbsp;</i>
+                <![endif]-->
+            </a>
+            <!-- End button here -->
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- End single column section -->
+    <br><br>
+    <!-- Start double column section -->
+    <table align="center" style="text-align: center; vertical-align: top; width: 600px; max-width: 600px; background-color: #ffffff;" width="600">
+      <tbody>
+        <tr>
+          <td style="width: 252px; vertical-align: top; padding-left: 30px; padding-right: 15px; padding-top: 0; padding-bottom: 30px; text-align: left;" width="252">
+
+            <p style="font-size: 15px; line-height: 12px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 500; text-decoration: none; color: #000000;">Best Regards.</p>
+            <p style="font-size: 15px; line-height: 12px; font-family: 'Helvetica', Arial, sans-serif; font-weight: 500; text-decoration: none; color: #000000;">Hyperion🦅</p>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- End double column section -->
+
+    <!-- Start unsubscribe section -->
+    <table align="center" style="text-align: center; vertical-align: top; width: 600px; max-width: 600px;" width="600">
+      <tbody>
+        <tr>
+          <td style="width: 596px; vertical-align: top; padding-left: 30px; padding-right: 30px; padding-top: 30px; padding-bottom: 30px;" width="596">
+
+            <p style="font-size: 12px; line-height: 12px; font-family: 'Helvetica', Arial, sans-serif; font-weight: normal; text-decoration: none; color: #919293; margin-top: 30px;">
+              Mail sent by Hyperion, P.G.D.A.V.(M) UoD
+            </p>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- End unsubscribe section -->
+
+  </div>
+
+</body>
+
+</html>
