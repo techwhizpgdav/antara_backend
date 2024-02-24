@@ -35,7 +35,14 @@ class UserController extends Controller
 
     public function unverifiedUsers(Request $request)
     {
-        $unverified_user = User::whereNull('fest_pass')->paginate(30);
+        if (!is_null($request->search) || !empty($request->search)) {
+            $unverified_user = User::where(function ($query) use ($request) {
+                $query->where('email', 'like', '%' . $request->search . '%')
+                    ->orWhere('name',  'like', '%' . $request->search . '%');
+            })->whereNull('fest_pass')->orderBy('created_at', 'desc')->paginate();
+        } else {
+            $unverified_user = User::whereNull('fest_pass')->paginate(30);
+        }
         return new GeneralResource($unverified_user);
     }
 
