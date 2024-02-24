@@ -76,4 +76,21 @@ class UserController extends Controller
         });
         return new GeneralResource($data);
     }
+
+    public function rejectPass(Request $request, $id): JsonResource
+    {
+        $data = DB::transaction(function () use ($id, $request) {
+            $user = User::where('fest_pass', null)->findOrFail($id);
+            $user->update(["fest_pass" => 0]);
+            $lock = Cache::lock($user->email, 7);
+            if (!$lock->get()) {
+                throw new HttpResponseException(response()->json(['message' => "Failed to acquire lock"], 423));
+            }
+            // Mail::to($user->email)
+            //     ->send(new SendPass(Str::upper($user->name)));
+            // SendInvite::dispatch($user->email, $user->name);
+            return $user;
+        });
+        return new GeneralResource($data);
+    }
 }

@@ -65,6 +65,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
         Route::get('counts', [AdminUserController::class, 'getCounts']);
         Route::get('recparticipate', [AdminUserController::class, 'recentPaticipate']);
         Route::put('issue-pass/{user}', [AdminUserController::class, 'issuePass']);
+        Route::put('reject-pass/{user}', [AdminUserController::class, 'rejectPass']);
     });
     Route::apiResource('sponsors', SponsorController::class)->middleware(['role:member']);
     Route::get('participations', [SocietyUserController::class, 'participations'])->middleware(['role:member']);
