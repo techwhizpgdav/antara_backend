@@ -62,7 +62,6 @@ class UserController extends Controller
     public function issuePass(Request $request, $id): JsonResource
     {
         $data = DB::transaction(function () use ($id, $request) {
-            Log::channel('passes')->info('pass' . time(), ['user_id' => $request->user()->id, 'pass_sent_to' => $id, 'ip' => $request->ip()]);
             $user = User::where('fest_pass', null)->findOrFail($id);
             $user->update(["fest_pass" => Str::uuid(), 'is_verified' => 1]);
             $lock = Cache::lock($user->email, 7);
@@ -72,6 +71,7 @@ class UserController extends Controller
             // Mail::to($user->email)
             //     ->send(new SendPass(Str::upper($user->name)));
             SendInvite::dispatch($user->email, $user->name)->delay(now()->addSeconds(20));
+            Log::channel('passes')->info('pass' . time(), ['user_id' => $request->user()->id, 'pass_sent_to' => $id, 'ip' => $request->ip()]);
             return $user;
         });
         return new GeneralResource($data);
