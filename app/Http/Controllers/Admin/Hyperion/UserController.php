@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\GeneralResource;
 use App\Jobs\SendInvite;
 use App\Mail\SendPass;
+use Carbon\Carbon;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Cache;
@@ -92,5 +93,40 @@ class UserController extends Controller
             return $user;
         });
         return new GeneralResource($data);
+    }
+
+    public function getPass(string $uuid)
+    {
+        $user = User::where('fest_pass', $uuid)->first();
+        if (!$user) {
+            return response()->json(['message' => 'Invalid pass'], 404);
+        }
+        $bool = DB::table('pass_usage')->where('user_id', $user->id)->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])->exists();
+        return ['user' => $user, 'validity' => !$bool];
+    }
+
+    public function validatePass(Request $request, string $uuid)
+    {
+        $data = DB::transaction(function () use ($request, $uuid) {
+            $user = User::where('fest_pass', $uuid)->first();
+            if (!$user) {
+                return response()->json(['message' => 'Invalide fest pass'], 404);
+            }
+            $bool = DB::table('pass_usage')->where('user_id', $user->id)->whereBetween('created_at', [Carbon::now()->startOfDay(), Carbon::now()->endOfDay()])->exists();
+            if ($bool) {
+                return response()->json(['message' => "pass used already"], 400);
+            } else {
+                DB::table('pass_usage')->insert([
+                    'user_id' => $user->id,
+                    'approved_by' => $request->user()->id,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+
+                return response()->json(['message' => 'User can go to premesis now.']);
+            }
+        });
+
+        return $data;
     }
 }
