@@ -67,6 +67,6 @@ class VerifyEmailController extends Controller
 
         // Optionally, you can log in the user or redirect to a login page
 
-        return redirect('https://arohana.pgdavhyperion.in');
+        return redirect('https://arohana.pgdavhyperion.in/dashboard');
     }
 }
