@@ -14,6 +14,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Admin\Hyperion\UserController as AdminUserController;
+use App\Http\Controllers\Admin\Society\ReportController;
 use App\Http\Controllers\Admin\Society\UserController as SocietyUserController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SubmissionController;
@@ -71,6 +72,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
     Route::get('participations', [SocietyUserController::class, 'participations'])->middleware(['role:member']);
     Route::post('download-card/{user}', [SocietyUserController::class, 'downloadCard'])->middleware(['role:member']);
     Route::get('submissions', [SocietyUserController::class, 'submissions'])->middleware(['role:member']);
+    Route::get('report', [ReportController::class, 'download'])->middleware(['role:member']);
     Route::put('submissions/{id}', [SocietyUserController::class, 'editSubmissions'])->middleware(['role:member']);
     Route::get('team/{code}', [SocietyUserController::class, 'teamDetails'])->middleware(['role:member']);
     // Society Routes
