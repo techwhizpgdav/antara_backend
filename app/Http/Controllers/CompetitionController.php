@@ -53,7 +53,8 @@ class CompetitionController extends Controller
             'sponsor_task' => 'nullable|boolean',
             'remarks' => 'boolean',
             'remarks_label' => 'nullable|string',
-            'whatsapp_group' => 'nullable|url:https'
+            'whatsapp_group' => 'nullable|url:https',
+            'deadline' => 'nullable|date',
         ]);
 
         $society = SocietyUser::where('user_id', auth()->user()->id)->first();
@@ -85,6 +86,7 @@ class CompetitionController extends Controller
                 'remarks' => $request->remarks,
                 'remarks_label' => $request->remarks_label,
                 'whatsapp_group' => $request->whatsapp_group,
+                'deadline' => $request->deadline
             ]
         );
 
@@ -140,7 +142,8 @@ class CompetitionController extends Controller
             'sponsor_task' => 'nullable|boolean',
             'remarks' => 'boolean',
             'remarks_label' => 'nullable|string',
-            'whatsapp_group' => 'nullable|url:https'
+            'whatsapp_group' => 'nullable|url:https',
+            'deadline' => 'nullable|date',
         ]);
 
         $update = $competition->update([
@@ -164,6 +167,7 @@ class CompetitionController extends Controller
             'remarks' => $request->remarks,
             'remarks_label' => $request->remarks_label,
             'whatsapp_group' => $request->whatsapp_group,
+            'deadline' => $request->deadline
         ]);
 
         return response()->json(['data' => $update]);
