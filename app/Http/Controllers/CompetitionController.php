@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\GeneralResource;
 use App\Http\Resources\CompetitionResource;
+use App\Models\Round;
 use App\Models\SocietyUser;
 use App\Models\User;
 use Carbon\Carbon;
@@ -96,6 +97,12 @@ class CompetitionController extends Controller
     public function show(string $id)
     {
         $record = Competition::with(['category', 'society', 'rounds.rules'])->findOrFail($id);
+        $onlineRound = Round::where('competition_id', $id)->where('mode', 'online')->exists();
+        if ($onlineRound) {
+            $online = 1;
+        } else {
+            $online = 0;
+        }
         if (auth()->check()) {
             $check = DB::table('competition_user')->where(['user_id' => auth()->user()->id, 'competition_id' => $id])->exists();
             if ($check) {
@@ -106,7 +113,7 @@ class CompetitionController extends Controller
         } else {
             $participated = false;
         }
-        return new CompetitionResource(['competition' => $record, 'participated' => $participated]);
+        return new CompetitionResource(['competition' => $record, 'participated' => $participated, 'online' => $online]);
     }
 
     /**
