@@ -19,7 +19,7 @@ class UserController extends Controller
 
         $user = User::find(auth()->user()->id)->societies;
         $adminCompetitions = Competition::with(['user' => function ($q) {
-            $q->select(['name', 'email', 'college', 'phone_number'])->wherePivot('leader', 1)->wherePivot('allowed', 1)->withPivot(['id', 'team', 'team_size', 'remarks', 'team_code', 'allowed', 'leader', 'payment_ss', 'sponsor_link']);
+            $q->select(['name', 'email', 'college', 'phone_number', 'identity'])->wherePivot('leader', 1)->wherePivot('allowed', 1)->withPivot(['id', 'team', 'team_size', 'remarks', 'team_code', 'allowed', 'leader', 'payment_ss', 'sponsor_link']);
         }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get();
         // ->groupBy('title');
 
@@ -34,7 +34,7 @@ class UserController extends Controller
     {
         $user = User::find(auth()->user()->id)->societies;
         $adminCompetitions = Competition::with(['userSubmissions' => function ($q) {
-            $q->select(['name', 'email', 'college'])->withPivot(['id', 'url', 'team_code', 'team_size', 'remarks', 'status', 'sponsor_link', 'payment_ss']);
+            $q->select(['name', 'email', 'college', 'identity'])->withPivot(['id', 'url', 'team_code', 'team_size', 'remarks', 'status', 'sponsor_link', 'payment_ss']);
         }])->whereIn('society_id', $user->pluck('id'))->select('title', 'id')->get();
 
         return new GeneralResource($adminCompetitions);
