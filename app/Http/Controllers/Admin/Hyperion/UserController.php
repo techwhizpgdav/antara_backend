@@ -96,7 +96,10 @@ class UserController extends Controller
     }
 
     public function getPass(string $uuid)
-    {
+    {   
+        if (strlen($uuid) < 36) {
+            return response()->json(['message' => "Invalid Pass"], 404);
+        }
         $user = User::where('fest_pass', $uuid)->first();
         if (!$user) {
             return response()->json(['message' => 'Invalid pass'], 404);
