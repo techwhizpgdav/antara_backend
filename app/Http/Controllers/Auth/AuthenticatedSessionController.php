@@ -92,4 +92,10 @@ class AuthenticatedSessionController extends Controller
 
         return response()->json(['message' => 'Successfully logged out']);
     }
+
+    public function getEntries(Request $request)
+    {
+        $data = DB::table('pass_usage')->where('user_id', $request->user()->id)->get();
+        return new GeneralResource($data);
+    }
 }

@@ -57,6 +57,8 @@ Route::post('user/upload-sponsor', [SponsorController::class, 'uploadSponsorImag
 
 Route::apiResource('sendpass', MailController::class);
 
+Route::get('entries', [AuthenticatedSessionController::class, 'getEntries'])->middleware(['auth:api']);
+
 Route::get('unverified-users', [AdminUserController::class, 'unverifiedUsers']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
     Route::group(['prefix' => 'hyperion', 'middleware' => ['role:hyperion']], function () {
