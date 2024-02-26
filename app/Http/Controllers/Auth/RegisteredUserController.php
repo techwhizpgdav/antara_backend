@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): array
+    public function store(Request $request)
     {
 
         return response()->json(['message' => "Registrations are closed. See you next year"], 400);
