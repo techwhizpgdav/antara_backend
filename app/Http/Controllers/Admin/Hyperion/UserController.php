@@ -129,4 +129,9 @@ class UserController extends Controller
 
         return $data;
     }
+
+    public function instagramUser()
+    {
+        return User::whereNotNull('instagram_id')->paginate(50);
+    }
 }

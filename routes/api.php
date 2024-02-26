@@ -71,6 +71,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
         Route::put('reject-pass/{user}', [AdminUserController::class, 'rejectPass']);
         Route::get('get-pass/{uuid}', [AdminUserController::class, 'getPass']);
         Route::get('verify-pass/{uuid}', [AdminUserController::class, 'validatePass']);
+        Route::get('instagram-users', [AdminUserController::class, 'instagramUser']);
     });
     Route::apiResource('sponsors', SponsorController::class)->middleware(['role:member']);
     Route::get('participations', [SocietyUserController::class, 'participations'])->middleware(['role:member']);
