@@ -73,6 +73,7 @@ class UserController extends Controller
             //     ->send(new SendPass(Str::upper($user->name)));
             SendInvite::dispatch($user->email, $user->name)->delay(now()->addSeconds(20));
             Log::channel('passes')->info('pass' . time(), ['user_id' => $request->user()->id, 'pass_sent_to' => $id, 'ip' => $request->ip()]);
+            $lock->release();
             return $user;
         });
         return new GeneralResource($data);
@@ -82,11 +83,14 @@ class UserController extends Controller
     {
         $data = DB::transaction(function () use ($id, $request) {
             $user = User::where('fest_pass', null)->findOrFail($id);
-            $user->update(["fest_pass" => 0]);
             $lock = Cache::lock($user->email, 7);
+            $user->update(["fest_pass" => 0]);
+            Log::channel('passes')->info('rejected_pass' . time(), ['user_id' => $request->user()->id, 'pass_sent_to' => $id, 'ip' => $request->ip()]);
             if (!$lock->get()) {
                 throw new HttpResponseException(response()->json(['message' => "Failed to acquire lock"], 423));
             }
+            Log::channel('passes')->info('delete_pass' . time(), ['user_id' => $request->user()->id, 'pass_sent_to' => $id, 'ip' => $request->ip()]);
+            $lock->release();
             // Mail::to($user->email)
             //     ->send(new SendPass(Str::upper($user->name)));
             // SendInvite::dispatch($user->email, $user->name);
@@ -96,7 +100,7 @@ class UserController extends Controller
     }
 
     public function getPass(string $uuid)
-    {   
+    {
         if (strlen($uuid) < 36) {
             return response()->json(['message' => "Invalid Pass"], 404);
         }
@@ -136,5 +140,37 @@ class UserController extends Controller
     public function instagramUser()
     {
         return User::whereNotNull('instagram_id')->paginate(50);
+    }
+
+    public function rejectedPasses(Request $request)
+    {
+        if (!is_null($request->search) || !empty($request->search)) {
+            $rejected_pass = User::where(function ($query) use ($request) {
+                $query->where('email', 'like', '%' . $request->search . '%')
+                    ->orWhere('name',  'like', '%' . $request->search . '%');
+            })->where('fest_pass', false)->orderBy('created_at', 'desc')->paginate(30);
+        } else {
+            $rejected_pass = User::where('fest_pass', 0)->paginate(30);
+        }
+        return new GeneralResource($rejected_pass);
+    }
+
+    public function approveRejectedPass(Request $request, string $id)
+    {
+        $data = DB::transaction(function () use ($id, $request) {
+            $user = User::where('fest_pass', 0)->findOrFail($id);
+            $lock = Cache::lock($user->email, 7);
+            $user->update(["fest_pass" => Str::uuid(), 'is_verified' => 1]);
+            if (!$lock->get()) {
+                throw new HttpResponseException(response()->json(['message' => "Failed to acquire lock"], 423));
+            }
+            // Mail::to($user->email)
+            //     ->send(new SendPass(Str::upper($user->name)));
+            SendInvite::dispatch($user->email, $user->name)->delay(now()->addSeconds(20));
+            Log::channel('passes')->info('rejected_pass' . time(), ['user_id' => $request->user()->id, 'pass_sent_to' => $id, 'ip' => $request->ip()]);
+            $lock->release();
+            return $user;
+        });
+        return new GeneralResource($data);
     }
 }

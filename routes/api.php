@@ -68,10 +68,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth:api']], function () {
         Route::get('counts', [AdminUserController::class, 'getCounts']);
         Route::get('recparticipate', [AdminUserController::class, 'recentPaticipate']);
         Route::put('issue-pass/{user}', [AdminUserController::class, 'issuePass']);
+        Route::put('approve-rejected-pass/{user}', [AdminUserController::class, 'approveRejectedPass']);
         Route::put('reject-pass/{user}', [AdminUserController::class, 'rejectPass']);
         Route::get('get-pass/{uuid}', [AdminUserController::class, 'getPass']);
         Route::get('verify-pass/{uuid}', [AdminUserController::class, 'validatePass']);
         Route::get('instagram-users', [AdminUserController::class, 'instagramUser']);
+        Route::get('rejected-passes', [AdminUserController::class, 'rejectedPasses']);
     });
     Route::apiResource('sponsors', SponsorController::class)->middleware(['role:member']);
     Route::get('participations', [SocietyUserController::class, 'participations'])->middleware(['role:member']);
