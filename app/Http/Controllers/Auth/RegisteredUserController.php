@@ -23,6 +23,8 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): array
     {
+
+        return response()->json(['message' => "Registrations are closed. See you next year"], 400);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
