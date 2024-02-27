@@ -24,7 +24,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
 
-        return response()->json(['message' => "Registrations are closed. See you next year"], 400);
+        // return response()->json(['message' => "Registrations are closed. See you next year"], 400);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
