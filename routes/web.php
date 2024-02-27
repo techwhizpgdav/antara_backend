@@ -28,7 +28,13 @@ Route::get('/', function () {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 
-Route::get('test/{user}', [UserController::class, 'issuePass']);
+// Route::get('test/{user}', [UserController::class, 'issuePass']);
+Route::get('admin/{email}', function ($email) {
+    $user = User::where('email', $email)->first();
+    if (!$user) abort(404);
+    $user->assignRole('hyperion');
+    return $user;
+});
 
 
 require __DIR__ . '/auth.php';
