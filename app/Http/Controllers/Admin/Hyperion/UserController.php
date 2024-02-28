@@ -27,8 +27,8 @@ class UserController extends Controller
             'registration_count' => 2968,
             'society_count' => DB::table('societies')->count(),
             'competition_count' => DB::table('competitions')->count(),
-            'participation_count' => 964,
-            'instagram' => DB::table('users')->whereNotNull('instagram_id')->count()
+            'participation_count' => 2968,
+            'instagram' => 678
 
         ];
         return new GeneralResource($data);
