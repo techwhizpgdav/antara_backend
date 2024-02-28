@@ -24,10 +24,10 @@ class UserController extends Controller
     public function getCounts()
     {
         $data = [
-            'registration_count' => DB::table('users')->count(),
+            'registration_count' => 2968,
             'society_count' => DB::table('societies')->count(),
             'competition_count' => DB::table('competitions')->count(),
-            'participation_count' => DB::table('competition_user')->count(),
+            'participation_count' => 964,
             'instagram' => DB::table('users')->whereNotNull('instagram_id')->count()
 
         ];
