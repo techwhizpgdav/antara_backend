@@ -83,7 +83,7 @@ class Competition extends Model
      */
     public function rounds(): HasMany
     {
-        return $this->hasMany(Round::class)->with('competition');
+        return $this->hasMany(Round::class);
     }
 
     /**
@@ -93,7 +93,7 @@ class Competition extends Model
      */
     public function rules(): HasManyThrough
     {
-        return $this->hasManyThrough(Rule::class, Round::class)->with(['round.competition']);
+        return $this->hasManyThrough(Rule::class, Round::class);
     }
 
     /**

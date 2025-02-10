@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Resources\GeneralResource;
 use App\Http\Resources\CompetitionResource;
+use App\Models\Category;
 use App\Models\Round;
 use App\Models\SocietyUser;
 use App\Models\User;
@@ -17,13 +18,25 @@ class CompetitionController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth:api', 'role:member|hyperion'], ['only' => ['index', 'store']]);
+        $this->middleware(['auth:api', 'role:member|hyperion'], ['only' => ['store']]);
         $this->middleware('role:member', ['only' => ['store', 'update', 'delete']]);
     }
     /**
      * Display a listing of the resource.
      */
     public function index()
+    {
+        $data = Category::with(['competitions' => function($q) {
+            $q->select('id', 'title', 'category_id', 'society_id', 'image_url', 'tag_line', 'date')
+            ->with('society:id,name');
+        }])->select(['id'])->get();
+        return new GeneralResource($data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function societiesComp()
     {
         $user = auth()->user();
         $data = $user->societyCompetitions;
@@ -98,7 +111,11 @@ class CompetitionController extends Controller
      */
     public function show(string $id)
     {
-        $record = Competition::with(['category', 'society', 'rounds.rules'])->findOrFail($id);
+        $record = Competition::with(['category:id,name', 'society:id,name', 'rounds' => function($q){
+            $q->select(['id', 'name', 'mode', 'competition_id'])
+            ->with('rules:id,round_id,statement');
+        }])->findOrFail($id);
+        
         $onlineRound = Round::where('competition_id', $id)->where('mode', 'online')->exists();
         if ($onlineRound) {
             $online = 1;

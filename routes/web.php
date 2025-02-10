@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Mail\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Cache;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
     return ['Future King of Pirates' => 'Monkey D. Luffy'];
 });
 

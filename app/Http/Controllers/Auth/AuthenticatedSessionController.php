@@ -28,13 +28,18 @@ class AuthenticatedSessionController extends Controller
     {
         $request->only(['email', 'password']);
         $user = User::where('email', $request->email)->first();
+        if ($user) {
+            if (!is_null($user->provider)) {
+                abort(401, "Try to login using: $user->provider");
+            }
+        }
         if (!$user || !Hash::check($request['password'], $user->password)) {
             throw ValidationException::withMessages([
                 'error' => ['Email and password does not match our records.']
             ]);
         }
 
-        return $user;
+        return $user->email;
     }
 
     /**
@@ -42,13 +47,13 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(Request $request): JsonResponse
     {
-        $this->checkCredentials($request);
-        $credentials = $request->only(['email', 'password']);
-        $token = auth()->attempt($credentials);
-        if (!$token) {
+        $email = $this->checkCredentials($request);
+        if (!$token = auth()->attempt(['email' => $email, 'password' => $request->password])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
-        return $this->respondWithToken($token);
+        $user = auth()->user();
+        $cookie = cookie("token", $token, auth()->factory()->getTTL() * 60, '/', env('COOKIE_DOMAIN'), true, true);
+        return $this->respondWithToken(['user' => $user])->withCookie($cookie);
     }
 
     /**

@@ -16,6 +16,7 @@ use App\Http\Controllers\ParticipationController;
 use App\Http\Controllers\Admin\Hyperion\UserController as AdminUserController;
 use App\Http\Controllers\Admin\Society\ReportController;
 use App\Http\Controllers\Admin\Society\UserController as SocietyUserController;
+use App\Http\Controllers\Auth\SocialiteController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\SubmissionController;
 
@@ -30,12 +31,17 @@ use App\Http\Controllers\SubmissionController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
 Route::get('/auth-user', [AuthenticatedSessionController::class, 'me'])->middleware(['auth:api']);
+
+Route::prefix('auth')->group(function () {
+    Route::get('redirect/{provider}', [SocialiteController::class, 'redirect']);
+    Route::get('callback', [SocialiteController::class, 'callback']);
+});
 
 Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);

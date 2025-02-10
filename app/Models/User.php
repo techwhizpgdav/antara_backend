@@ -37,7 +37,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'instagram_id',
         'pgdav',
         'fest_pass',
-        'is_verified'
+        'is_verified',
+        'provider',
+        'provider_id',
+        'avatar',
+        'email_verified_at'
     ];
 
     /**
