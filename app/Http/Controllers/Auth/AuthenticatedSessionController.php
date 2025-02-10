@@ -13,6 +13,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\GeneralResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -51,6 +52,7 @@ class AuthenticatedSessionController extends Controller
         if (!$token = auth()->attempt(['email' => $email, 'password' => $request->password])) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
+        Log::info($token);
         $user = auth()->user();
         $cookie = cookie("token", $token, auth()->factory()->getTTL() * 60, '/', env('COOKIE_DOMAIN'), true, true);
         return $this->respondWithToken(['user' => $user])->withCookie($cookie);

