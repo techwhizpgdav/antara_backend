@@ -55,7 +55,7 @@ class AuthenticatedSessionController extends Controller
         Log::info($token);
         $user = auth()->user();
         $cookie = cookie("token", $token, auth()->factory()->getTTL() * 60, '/', env('COOKIE_DOMAIN'), true, true);
-        return $this->respondWithToken(['user' => $user])->withCookie($cookie);
+        return response()->json($this->respondWithToken(['user' => $user]))->withCookie($cookie);
     }
 
     /**
