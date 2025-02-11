@@ -36,7 +36,7 @@ Route::post('new-admin', function (Request $request) {
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
-    ])->assignRole('member');
+    ])->assignRole('hyperion');
     DB::table('society_user')->insert([
         'society_id' => $request->society_id,
         'user_id' => $user->id,
