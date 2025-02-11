@@ -93,7 +93,7 @@ class Competition extends Model
      */
     public function socRounds(): HasMany
     {
-        return $this->hasMany(Round::class)->with(['competition:id,round_id,title']);
+        return $this->hasMany(Round::class)->with(['competition:id,title']);
     }
 
     /**
