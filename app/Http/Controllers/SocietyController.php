@@ -11,7 +11,7 @@ class SocietyController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api', ['only' => ['index', 'store']]);
+        $this->middleware('auth:api', ['only' => ['store']]);
         $this->middleware('role:hyperion', ['only' => ['store', 'update', 'delete']]);
     }
     /**

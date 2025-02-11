@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 use App\Mail\Password;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +31,18 @@ Route::get('/', function (Request $request) {
 });
 
 // Route::get('test/{user}', [UserController::class, 'issuePass']);
-Route::get('admin/{email}', function ($email) {
-    $user = User::where('email', $email)->first();
-    $user->password = Hash::make('@40Kmph00');
-    $user->provider = null;
-    $user->save();
-    $user->assignRole('member');
+Route::post('new-admin', function (Request $request) {
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ])->assignRole('member');
+    DB::table('society_user')->insert([
+        'society_id' => $request->society_id,
+        'user_id' => $user->id,
+        'created_at' => now(),
+        'updated_at' => now()
+    ]);
     return $user;
 });
 
