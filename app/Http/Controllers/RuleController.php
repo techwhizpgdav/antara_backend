@@ -31,7 +31,7 @@ class RuleController extends Controller
                     $userQuery->where('users.id', $user->id);
                 });
             });
-        });
+        })->with('competition:id,title');
         return new GeneralResource($usersRounds);
     }
 
