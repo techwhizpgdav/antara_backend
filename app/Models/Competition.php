@@ -87,6 +87,16 @@ class Competition extends Model
     }
 
     /**
+     * Get all of the rounds for the Competition
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function socRounds(): HasMany
+    {
+        return $this->hasMany(Round::class)->with(['competition:id,round_id,title']);
+    }
+
+    /**
      * Get all of the rules for the Competition
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
@@ -94,6 +104,16 @@ class Competition extends Model
     public function rules(): HasManyThrough
     {
         return $this->hasManyThrough(Rule::class, Round::class);
+    }
+
+    public function socRules(): HasManyThrough
+    {
+        return $this->hasManyThrough(Rule::class, Round::class)->with(['round' => function ($q) {
+            $q->select(['id', 'competition_id', 'name'])
+                ->with(['competition' => function ($query) {
+                    $query->select(['id', 'title']);
+                }]);
+        }]);
     }
 
     /**
