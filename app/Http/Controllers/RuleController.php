@@ -20,19 +20,22 @@ class RuleController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-        // $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
-        //     return $competition->rules;
-        // });
+        $user = auth()->user(); // Get the authenticated user
 
-        $usersRounds = Round::whereHas('competition', function ($comp) use ($user) {
-            $comp->whereHas('society', function ($society) use ($user) {
-                $society->whereHas('users', function ($userQuery) use ($user) {
-                    $userQuery->where('users.id', $user->id);
+        $rules = Rule::whereHas('round', function ($roundQuery) use ($user) {
+            $roundQuery->whereHas('competition', function ($competitionQuery) use ($user) {
+                $competitionQuery->whereHas('society', function ($societyQuery) use ($user) {
+                    $societyQuery->whereHas('users', function ($userQuery) use ($user) {
+                        $userQuery->where('users.id', $user->id);
+                    });
                 });
             });
-        })->with('competition:id,title');
-        return ['data' => $usersRounds];
+        })->with(['round'=> function($round){
+            $round->select(['id', 'competition_id', 'name'])
+            ->with(['competition:id,title']);
+        }])->get();
+
+        return new GeneralResource($rules);
     }
 
     /**

@@ -23,10 +23,14 @@ class RoundController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
-            return $competition->rounds;
-        });
-        return new GeneralResource($usersRounds);
+        $rounds = Round::whereHas('competition', function ($competitionQuery) use ($user) {
+            $competitionQuery->whereHas('society', function ($societyQuery) use ($user) {
+                $societyQuery->whereHas('users', function ($userQuery) use ($user) {
+                    $userQuery->where('users.id', $user->id);
+                });
+            });
+        })->with(['competition:id,title'])->get();
+        return new GeneralResource($rounds);
     }
 
     /**
