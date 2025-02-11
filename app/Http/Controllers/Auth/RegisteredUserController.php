@@ -29,11 +29,11 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', 'min:8'],
-            'password' => ['required', 'confirmed', 'min:8'],
-            'college_id' => ['required', 'image'],
+            // 'password' => ['required', 'confirmed', 'min:8'],
+            // 'college_id' => ['required', 'image'],
             // 'sponsor_task' => ['required_if:pgdav,true', 'image'],
-            'phone' => ['required', 'digits:10', 'unique:users,phone_number'],
-            'college' => ['required', 'string'],
+            // 'phone' => ['required', 'digits:10', 'unique:users,phone_number'],
+            // 'college' => ['required', 'string'],
             'instagram_id' => ['nullable', 'string'],
             'pgdav' => ['nullable', 'boolean']
         ]);
@@ -49,12 +49,12 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'phone_number' => $request->phone,
-            'college' => $request->college,
-            'identity' => $identity,
-            'sponsor_task' => $sponsor_task,
-            'instagram_id' => $request->instagram_id,
-            'pgdav' => $request->pgdav ?? 0,
+            // 'phone_number' => $request->phone,
+            // 'college' => $request->college,
+            // 'identity' => $identity,
+            // 'sponsor_task' => $sponsor_task,
+            // 'instagram_id' => $request->instagram_id,
+            // 'pgdav' => $request->pgdav ?? 0,
         ]);
         // ->assignRole('user');
 
