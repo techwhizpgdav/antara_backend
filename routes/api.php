@@ -43,6 +43,7 @@ Route::prefix('auth')->group(function () {
     Route::get('callback', [SocialiteController::class, 'callback']);
 });
 
+Route::get('society-competitions', [CompetitionController::class, 'societiesComp']);
 Route::apiResource('societies', SocietyController::class);
 Route::apiResource('competitions', CompetitionController::class);
 Route::apiResource('categories', CategoryController::class);
