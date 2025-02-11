@@ -48,7 +48,7 @@ class SocialiteController extends Controller
         $token = Auth::login($login_user);
         $user = auth()->user();
         $cookie = cookie("token", $token, auth()->factory()->getTTL() * 60, '/', env('COOKIE_DOMAIN'), true, true);
-        return redirect("https://arohana.pgdavhyperion.in?token=$token")->withCookie($cookie);
+        return redirect("https://arohana.pgdavhyperion.in/login?token=$token")->withCookie($cookie);
     }
 
     protected function respondWithToken($token): JsonResponse
