@@ -21,12 +21,16 @@ class RuleController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
-            return $competition->rules;
-        });
+        // $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
+        //     return $competition->rules;
+        // });
 
-        Round::whereHas('competition', function($comp) use ($user){
-            $comp->whereHas('society', function($society) use ($user))
+        $usersRounds = Round::whereHas('competition', function($comp) use ($user){
+            $comp->whereHas('society', function($society) use ($user){
+                $society->whereHas('users', function($userQuery) use ($user){
+                    $userQuery->where('users.id', $user->id);
+                });
+            });
         });
         return new GeneralResource($usersRounds);
     }
