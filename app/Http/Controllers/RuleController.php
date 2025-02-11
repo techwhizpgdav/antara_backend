@@ -25,14 +25,14 @@ class RuleController extends Controller
         //     return $competition->rules;
         // });
 
-        $usersRounds = Round::whereHas('competition', function($comp) use ($user){
-            $comp->whereHas('society', function($society) use ($user){
-                $society->whereHas('users', function($userQuery) use ($user){
+        $usersRounds = Round::whereHas('competition', function ($comp) use ($user) {
+            $comp->whereHas('society', function ($society) use ($user) {
+                $society->whereHas('users', function ($userQuery) use ($user) {
                     $userQuery->where('users.id', $user->id);
                 });
             });
         })->with('competition:id,title');
-        return new GeneralResource($usersRounds);
+        return ['data' => $usersRounds];
     }
 
     /**
