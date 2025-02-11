@@ -105,7 +105,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      */
     public function societyCompetitions(): HasManyThrough
     {
-        return $this->hasManyThrough(Competition::class, SocietyUser::class, 'user_id', 'society_id', 'id', 'society_id')->with(['category', 'socRounds', 'socRules']);
+        return $this->hasManyThrough(Competition::class, SocietyUser::class, 'user_id', 'society_id', 'id', 'society_id');
     }
 
     /**

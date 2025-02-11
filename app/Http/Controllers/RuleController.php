@@ -6,6 +6,7 @@ use App\Models\Rule;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\GeneralResource;
+use App\Models\Round;
 
 class RuleController extends Controller
 {
@@ -22,6 +23,10 @@ class RuleController extends Controller
         $user = auth()->user();
         $usersRounds = $user->societyCompetitions->flatMap(function ($competition) {
             return $competition->rules;
+        });
+
+        Round::whereHas('competition', function($comp) use ($user){
+            $comp->whereHas('society', function($society) use ($user))
         });
         return new GeneralResource($usersRounds);
     }
