@@ -68,7 +68,7 @@ class CompetitionController extends Controller
             'remarks_label' => 'nullable|string',
             'whatsapp_group' => 'nullable|url:https',
             'deadline' => 'nullable|date',
-            'form_link' => 'required|url'
+            'form_link' => 'required|url',
         ]);
 
         $society = SocietyUser::where('user_id', auth()->user()->id)->first();
@@ -163,6 +163,7 @@ class CompetitionController extends Controller
             'remarks_label' => 'nullable|string',
             'whatsapp_group' => 'nullable|url:https',
             'deadline' => 'nullable|date',
+            'form_link' => 'nullable|url'
         ]);
 
         $update = $competition->update([
