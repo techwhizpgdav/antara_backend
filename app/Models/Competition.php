@@ -41,7 +41,8 @@ class Competition extends Model
         'sponsor_task',
         'remarks_label',
         'whatsapp_group',
-        'deadline'
+        'deadline',
+        'form_link'
     ];
 
     /**
